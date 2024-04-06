@@ -76,6 +76,7 @@ class FlagCodes():
     p_demo = 32
     p_blank_track = 40
     p_genre_country_folk = 50
+    m_year = 60
 
     @classmethod
     def to_str(cls, in_code):
@@ -94,7 +95,8 @@ class FlagCodes():
                   FlagCodes.p_demo: 'possible_demo_performance',
                   FlagCodes.p_blank_track: 'possible_blank_track',
                   FlagCodes.p_genre_country_folk:
-                  'country_and_folk_genre_is_too_vague'}
+                  'country_and_folk_genre_is_too_vague',
+                  FlagCodes.m_year: 'missing_copyright_year'}
         if in_code in matrix:
             return matrix[in_code]
         return ''
