@@ -33,8 +33,6 @@ each musical album.
 
 '''
 
-# pylint: disable=invalid-name
-
 import argparse
 import os
 import os.path
@@ -148,15 +146,14 @@ if __name__ == '__main__':
                         help='write debug info in XML files')
 
     args = parser.parse_args()
-    musicpath = ''
-    if 'MUSICPATH' in os.environ:
-        musicpath = os.environ['MUSICPATH']
-    if args.musicpath:
-        musicpath = args.musicpath
+    musicpath = args.musicpath
     if not musicpath:
-        print("\nFAILURE: Can't find a source path of music files.\n")
-        parser.print_help()
-        sys.exit(2)
+        if 'MUSICPATH' in os.environ:
+            musicpath = os.environ['MUSICPATH']
+        else:
+            print("\nFAILURE: Can't find a source path for music files.\n")
+            parser.print_help()
+            sys.exit(2)
     stats = Stats()
     all_files = get_files(musicpath, stats)
     data = scan_files(all_files)
