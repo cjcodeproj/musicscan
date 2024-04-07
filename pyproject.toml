@@ -23,7 +23,7 @@ classifiers = [
   "Topic :: Text Processing :: Markup :: XML",
   "Topic :: Multimedia",
   "Topic :: Multimedia :: Sound/Audio",
-  "Topic :: Multimedia :: Sound/Audio Analysis"
+  "Topic :: Multimedia :: Sound/Audio :: Analysis"
 ]
 
 [project.urls]

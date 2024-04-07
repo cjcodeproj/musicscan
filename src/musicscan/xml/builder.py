@@ -258,10 +258,15 @@ class Album():
         '''
         Write out the album catalog element.
         '''
+        first_track = in_album.first_track()
         output = " <catalog>\n"
         output += "  <artists>\n"
-        output += f"  {in_album.artist.to_xml()}\n"
+        output += f"   {in_album.artist.to_xml()}\n"
         output += "  </artists>\n"
+        if first_track.year != '0000':
+            output += "  <copyright>\n" +\
+                      f"   <year>{first_track.year}</year>\n" +\
+                      "  </copyright>\n"
         output += " </catalog>\n"
         return output
 
@@ -338,7 +343,7 @@ class SongElementXML():
                 output += "   <composers>\n" +\
                           "    <composer><unkn>" +\
                           f"{sanitize_for_xml(in_track.composer)}" +\
-                          "</unkn></composer>" +\
+                          "</unkn></composer>\n" +\
                           "   </composers>\n"
             output += "   </catalog>\n"
         return output

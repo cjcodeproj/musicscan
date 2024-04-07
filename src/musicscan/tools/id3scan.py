@@ -33,7 +33,6 @@ each musical album.
 
 '''
 
-
 import argparse
 import os
 import os.path
@@ -102,7 +101,7 @@ def write_xml_files(in_organizer, in_args, in_stats):
     Write out the XML files with the accumulated ID3 data.
     '''
     if not os.path.isdir(in_args.outdir):
-        print(F"FAILURE: Cannot write to output path {in_args.outdir}\n")
+        print("\nFAILURE: Cannot write to output path {in_args.outdir}\n")
         sys.exit(1)
     writer = XMLFileWriter(in_args.outdir)
     writer.set_debug(in_args.debug)
@@ -147,11 +146,15 @@ if __name__ == '__main__':
                         help='write debug info in XML files')
 
     args = parser.parse_args()
-    musicpath = args.musicpath or os.environ['MUSICPATH']
-    stats = Stats()
+    musicpath = args.musicpath
     if not musicpath:
-        parser.print_help()
-        sys.exit(2)
+        if 'MUSICPATH' in os.environ:
+            musicpath = os.environ['MUSICPATH']
+        else:
+            print("\nFAILURE: Can't find a source path for music files.\n")
+            parser.print_help()
+            sys.exit(2)
+    stats = Stats()
     all_files = get_files(musicpath, stats)
     data = scan_files(all_files)
     library = Library()
