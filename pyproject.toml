@@ -1,6 +1,6 @@
 [project]
 name = "musicscan"
-version = "0.1"
+version = "0.1.2"
 description = "Package for converting music metadata to XML"
 readme = "README.md"
 requires-python = ">3.8"
@@ -23,7 +23,7 @@ classifiers = [
   "Topic :: Text Processing :: Markup :: XML",
   "Topic :: Multimedia",
   "Topic :: Multimedia :: Sound/Audio",
-  "Topic :: Multimedia :: Sound/Audio Analysis"
+  "Topic :: Multimedia :: Sound/Audio :: Analysis"
 ]
 
 [project.urls]

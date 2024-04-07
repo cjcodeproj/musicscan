@@ -29,7 +29,7 @@ Data objects for music.
 # pylint: disable=too-many-instance-attributes
 
 from datetime import timedelta
-from musicscan.data.flags import Flags
+from musicscan.data.flags import Flags, FlagCodes
 from musicscan.data.stringtools import sanitize_year
 
 
@@ -48,6 +48,7 @@ class Track():
         self.short_title = ''
         self.album_artist = ''
         self.composer = ''
+        self.year = '0000'
         self.flags = Flags()
         self.indices = []
         self._process(in_tag)
@@ -76,7 +77,10 @@ class Track():
         self.duration_f = self.duration_r * 100 / int(100)
         self.duration_t = timedelta(seconds=float(self.duration_f))
         self.duration_s = Track._make_iso_interval(self.duration_t)
-        self.year = sanitize_year(in_tag.year)
+        if in_tag.year:
+            self.year = sanitize_year(in_tag.year)
+        else:
+            self.flags.add_flag(FlagCodes.m_year)
 
     def set_album_object(self, in_album_object):
         '''
