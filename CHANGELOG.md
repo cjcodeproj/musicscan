@@ -1,6 +1,10 @@
 musicscan CHANGELOG
 ======================
 
+## CURRENT
+ - [musicscan-13](https://github.com/cjcodeproj/musicscan/issues/13) Integer value sanity
+
+
 ## RELEASE 0.1.2
  - [musicscan-8](https://github.com/cjcodeproj/musicscan/issues/8) Release 0.1.2
  - [musicscan-7](https://github.com/cjcodeproj/musicscan/issues/7) Code should accomodate for empty environmental variable
