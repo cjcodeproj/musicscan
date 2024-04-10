@@ -28,7 +28,7 @@ Data objects for music.
 
 # pylint: disable=too-many-instance-attributes
 
-from musicscan.data.flags import Flags
+from musicscan.data.flags import Flags, FlagCodes
 from musicscan.data.titletools import ShortTitleIndex, ShortTitle
 from musicscan.data.track import Track
 from musicscan.data.stringtools import build_complete_filename
@@ -143,6 +143,9 @@ class Disc():
         Update data after all import operations are done.
         '''
         for trk in sorted(self.tracks):
+            if not trk.title:
+                trk.title = 'PLACEHOLDER TITLE'
+                trk.flags.add_flag(FlagCodes.m_title)
             trk.short_title = ShortTitle(trk.title, self.album.title_index)
 
     def report(self):
