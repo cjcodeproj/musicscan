@@ -2,6 +2,7 @@ musicscan CHANGELOG
 ======================
 
 ## CURRENT
+ - [musicscan-20](https://github.com/cjcodeproj/musicscan/issues/20) XML album output not putting songs in order
  - [musicscan-14](https://github.com/cjcodeproj/musicscan/issues/14) Handle invalid titles
  - [musicscan-13](https://github.com/cjcodeproj/musicscan/issues/13) Integer value sanity
 

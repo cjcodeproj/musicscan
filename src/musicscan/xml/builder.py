@@ -290,7 +290,7 @@ class Album():
         output = " <elements>\n"
         song = SongElementXML(self.debug)
         for dsc in sorted(in_album.discs):
-            for trk in in_album.discs[dsc].tracks:
+            for trk in sorted(in_album.discs[dsc].tracks, key=lambda x: x.track_no):
                 output += song.build(trk)
         output += " </elements>\n"
         return output
