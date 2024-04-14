@@ -2,6 +2,7 @@ musicscan CHANGELOG
 ======================
 
 ## CURRENT
+ - [musicscan-19](https://github.com/cjcodeproj/musicscan/issues/19) first_track issue
  - [musicscan-23](https://github.com/cjcodeproj/musicscan/issues/23) String replacement bug
  - [musicscan-21](https://github.com/cjcodeproj/musicscan/issues/21) ID3 data validation
  - [musicscan-20](https://github.com/cjcodeproj/musicscan/issues/20) XML album output not putting songs in order
