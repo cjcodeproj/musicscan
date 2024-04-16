@@ -1,6 +1,17 @@
 musicscan CHANGELOG
 ======================
 
+## CURRENT
+ - [musicscan-25](https://github.com/cjcodeproj/musicscan/issues/25) Consider editing documentation
+ - [musicscan-24](https://github.com/cjcodeproj/musicscan/issues/24) Pointer hints between song and index in XML
+ - [musicscan-19](https://github.com/cjcodeproj/musicscan/issues/19) first_track issue
+ - [musicscan-23](https://github.com/cjcodeproj/musicscan/issues/23) String replacement bug
+ - [musicscan-21](https://github.com/cjcodeproj/musicscan/issues/21) ID3 data validation
+ - [musicscan-20](https://github.com/cjcodeproj/musicscan/issues/20) XML album output not putting songs in order
+ - [musicscan-14](https://github.com/cjcodeproj/musicscan/issues/14) Handle invalid titles
+ - [musicscan-13](https://github.com/cjcodeproj/musicscan/issues/13) Integer value sanity
+
+
 ## RELEASE 0.1.2
  - [musicscan-8](https://github.com/cjcodeproj/musicscan/issues/8) Release 0.1.2
  - [musicscan-7](https://github.com/cjcodeproj/musicscan/issues/7) Code should accomodate for empty environmental variable

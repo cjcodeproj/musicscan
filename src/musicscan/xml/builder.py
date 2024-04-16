@@ -174,10 +174,12 @@ class Index():
         Build an index structure for a single CD.
         '''
         ns_str = ''
+        timestamp = datetime.datetime.now()
         if in_namespace:
             ns_str = " xmlns='http://vectortron.com/xml/media/media'"
         output = f"  <cdIndex ref='cd{in_cd.disc_no:02}'{ns_str}>\n"
-        for trk in sorted(in_cd.tracks):
+        output += f"  <!-- created by id3scan ({timestamp}) -->\n"
+        for trk in sorted(in_cd.tracks, key=lambda x: x.track_no):
             output += self.add_track_xml(trk)
         output += "  </cdIndex>\n"
         return output
@@ -236,7 +238,9 @@ class Album():
         '''
         Write out the main body of the album element.
         '''
+        timestamp = datetime.datetime.now()
         output = "  <album xmlns='http://vectortron.com/xml/media/audio'>\n"
+        output += f" <!-- created by id3scan ({timestamp}) -->\n"
         output += f"   <title>{in_album.title}</title>\n"
         output += in_album.flags.to_xml_comment()
         output += self.build_chunk_catalog(in_album)
@@ -290,7 +294,8 @@ class Album():
         output = " <elements>\n"
         song = SongElementXML(self.debug)
         for dsc in sorted(in_album.discs):
-            for trk in in_album.discs[dsc].tracks:
+            for trk in sorted(in_album.discs[dsc].tracks,
+                              key=lambda x: x.track_no):
                 output += song.build(trk)
         output += " </elements>\n"
         return output

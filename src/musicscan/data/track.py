@@ -44,6 +44,9 @@ class Track():
         self.album = ''
         self.album_o = None
         self.track_no = 0
+        self.track_total = 0
+        self.disc_no = 0
+        self.disc_total = 0
         self.bpm = 0
         self.short_title = ''
         self.album_artist = ''
@@ -57,22 +60,12 @@ class Track():
         self.title = in_tag.title
         self.genre = in_tag.genre
         self.artist = in_tag.artist
-        self.track_no = int(in_tag.track)
-        self.track_total = int(in_tag.track_total)
-        if not in_tag.disc:
-            self.disc_no = 1
-        else:
-            self.disc_no = int(in_tag.disc)
-        if not in_tag.disc_total:
-            self.disc_total = 1
-        else:
-            self.disc_total = int(in_tag.disc_total)
+        self._process_integer_values(in_tag)
         self.album = in_tag.album
         if in_tag.albumartist:
             self.album_artist = in_tag.albumartist
         if in_tag.composer:
             self.composer = in_tag.composer
-        # self.disc_count = int(in_tag.disc_total)
         self.duration_r = in_tag.duration
         self.duration_f = self.duration_r * 100 / int(100)
         self.duration_t = timedelta(seconds=float(self.duration_f))
@@ -81,6 +74,19 @@ class Track():
             self.year = sanitize_year(in_tag.year)
         else:
             self.flags.add_flag(FlagCodes.m_year)
+
+    def _process_integer_values(self, in_tag):
+        '''
+        Process integer values and make sure they are valid.
+        '''
+        if in_tag.track:
+            self.track_no = int(in_tag.track)
+        if in_tag.track_total:
+            self.track_total = int(in_tag.track_total)
+        if in_tag.disc:
+            self.disc_no = int(in_tag.disc)
+        if in_tag.disc_total:
+            self.disc_total = int(in_tag.disc_total)
 
     def set_album_object(self, in_album_object):
         '''

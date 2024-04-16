@@ -73,8 +73,10 @@ def sanitize_for_xml(in_string):
     Fix a string so it is suitable to go into
     XML output.
     '''
-    out = in_string.replace('&', '&amp;') \
-        .replace('<', '&lt;').replace('>', '&gt;')
+    out = ''
+    if in_string:
+        out = in_string.replace('&', '&amp;') \
+            .replace('<', '&lt;').replace('>', '&gt;')
     return out
 
 

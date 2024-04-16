@@ -108,7 +108,7 @@ class XMLFileWriter():
         Write all the XML data in a single file.
         '''
         complete = self._path + '/' + in_album.filename('audiocd')
-        audiocd = CompleteCompactDiscXML()
+        audiocd = CompleteCompactDiscXML(self._debug)
         if not os.path.isfile(complete) or self._overwrite:
             with open(complete, mode='w', encoding='utf-8') as f_handle:
                 f_handle.write(audiocd.build(in_album))
@@ -128,7 +128,7 @@ class XMLFileWriter():
         Write the XML data pertaining to the audio CD.
         '''
         complete = self._path + '/' + in_album.filename('audiocd')
-        audiocd = SplitCompactDiscXML()
+        audiocd = SplitCompactDiscXML(self._debug)
         if not os.path.isfile(complete) or self._overwrite:
             with open(complete, mode='w', encoding='utf-8') as f_handle:
                 f_handle.write(audiocd.build(in_album))
@@ -139,7 +139,7 @@ class XMLFileWriter():
         '''
         Write the XML data pertaining to the CD index.
         '''
-        index = Index()
+        index = Index(self._debug)
         for dsc in sorted(in_album.discs):
             dsc_o = in_album.discs[dsc]
             f_str = f"cd{dsc_o.disc_no:02}-index"
@@ -155,7 +155,7 @@ class XMLFileWriter():
         Write out the XML data pertaining to the album contents.
         '''
         complete = self._path + '/' + in_album.filename('album')
-        album = Album()
+        album = Album(self._debug)
         if not os.path.isfile(complete) or self._overwrite:
             with open(complete, mode='w', encoding='utf-8') as f_handle:
                 f_handle.write(album.build_standalone_album(in_album))
