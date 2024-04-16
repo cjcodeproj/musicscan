@@ -40,6 +40,7 @@ class Analyzer():
         '''
         Main album testing routine.
         '''
+        self.check_album_values(in_album)
         self.test_album_title(in_album)
         self.test_album_artist(in_album)
         self.test_soundtrack(in_album)
@@ -47,10 +48,29 @@ class Analyzer():
         for dsc in sorted(in_album.discs):
             for trk in sorted(in_album.discs[dsc].tracks,
                               key=lambda x: x.track_no):
+                self.check_track_values(trk)
                 self.test_album_track_chrs(trk)
                 self.test_album_track_featured(trk)
                 self.test_album_track_live(trk)
                 self.test_album_track_blank(trk)
+
+    def check_album_values(self, in_album):
+        '''
+        If album values are missing, put in placeholder
+        values.
+        '''
+        if not in_album.title:
+            in_album.title = 'PLACEHOLDER ALBUM TITLE'
+            in_album.flags.add_flag(FlagCodes.m_album_title)
+
+    def check_track_values(self, in_track):
+        '''
+        If track values are missing, put in placeholder
+        values.
+        '''
+        if not in_track.artist:
+            in_track.artist = 'PLACEHOLDER TRACK ARTIST'
+            in_track.flags.add_flag(FlagCodes.m_track_artist)
 
     def test_album_title(self, in_album):
         '''
@@ -84,7 +104,7 @@ class Analyzer():
         '''
         score_p = re.compile(r'\s+Score\s+', re.IGNORECASE)
         if score_p.search(in_album.title):
-            in_album.flags.add(FlagCodes.p_score)
+            in_album.flags.add_flag(FlagCodes.p_score)
 
     def test_album_artist(self, in_album):
         '''

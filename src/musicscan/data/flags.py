@@ -77,6 +77,9 @@ class FlagCodes():
     p_blank_track = 40
     p_genre_country_folk = 50
     m_year = 60
+    m_title = 61
+    m_album_title = 62
+    m_track_artist = 63
 
     @classmethod
     def to_str(cls, in_code):
@@ -96,7 +99,10 @@ class FlagCodes():
                   FlagCodes.p_blank_track: 'possible_blank_track',
                   FlagCodes.p_genre_country_folk:
                   'country_and_folk_genre_is_too_vague',
-                  FlagCodes.m_year: 'missing_copyright_year'}
+                  FlagCodes.m_year: 'missing_copyright_year',
+                  FlagCodes.m_title: 'missing_title',
+                  FlagCodes.m_album_title: 'missing_album_title',
+                  FlagCodes.m_track_artist: 'missing_artist'}
         if in_code in matrix:
             return matrix[in_code]
         return ''

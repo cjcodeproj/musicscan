@@ -28,7 +28,7 @@ Data objects for music.
 
 # pylint: disable=too-many-instance-attributes
 
-from musicscan.data.flags import Flags
+from musicscan.data.flags import Flags, FlagCodes
 from musicscan.data.titletools import ShortTitleIndex, ShortTitle
 from musicscan.data.track import Track
 from musicscan.data.stringtools import build_complete_filename
@@ -45,6 +45,7 @@ class Album():
         self.artist = in_artist
         self.title_index = ShortTitleIndex()
         self.discs = {}
+        self._first_disc = None
         self.flags = Flags()
         self.track_count = 0
 
@@ -94,7 +95,8 @@ class Album():
         '''
         Return the very first track of the album.
         '''
-        return self.discs[1].tracks[0]
+        # return self.discs[1].tracks[0]
+        return self._first_disc.first_track()
 
     def tracks_in_order(self):
         '''
@@ -109,10 +111,17 @@ class Album():
 
     def finalize(self):
         '''
-        Finalize each object by setting up the short titles
-        for each track.
+        Finalize each object with several cleanup routines.
+
+        1. Identify which disc is the first.
+        2. Set up the short titles for every track.
+
         '''
-        for dsc in sorted(self.discs):
+        # Identify first disc
+        sort_d = sorted(self.discs)
+        self._first_disc = self.discs[sort_d[0]]
+        # Process all short titles
+        for dsc in sort_d:
             self.discs[dsc].finalize()
 
     def __str__(self):
@@ -128,6 +137,7 @@ class Disc():
         self.album = in_album
         self.tracks = []
         self.raw = []
+        self._first_track = None
 
     def import_tag(self, in_tag, in_album):
         '''
@@ -138,11 +148,22 @@ class Disc():
         trk.set_album_object(in_album)
         self.tracks.append(trk)
 
+    def first_track(self):
+        '''
+        Return the first track of the disc.
+        '''
+        return self._first_track
+
     def finalize(self):
         '''
         Update data after all import operations are done.
         '''
-        for trk in sorted(self.tracks):
+        sort_t = sorted(self.tracks, key=lambda x: x.track_no)
+        self._first_track = sort_t[0]
+        for trk in sort_t:
+            if not trk.title:
+                trk.title = 'PLACEHOLDER TITLE'
+                trk.flags.add_flag(FlagCodes.m_title)
             trk.short_title = ShortTitle(trk.title, self.album.title_index)
 
     def report(self):
