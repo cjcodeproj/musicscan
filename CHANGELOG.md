@@ -2,6 +2,7 @@ musicscan CHANGELOG
 ======================
 
 ## CURRENT
+ - [musicscan-25](https://github.com/cjcodeproj/musicscan/issues/25) Consider editing documentation
  - [musicscan-24](https://github.com/cjcodeproj/musicscan/issues/24) Pointer hints between song and index in XML
  - [musicscan-19](https://github.com/cjcodeproj/musicscan/issues/19) first_track issue
  - [musicscan-23](https://github.com/cjcodeproj/musicscan/issues/23) String replacement bug
