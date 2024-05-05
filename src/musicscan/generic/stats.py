@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #
-# Copyright 2023 Chris Josephes
+# Copyright 2024 Chris Josephes
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -26,6 +26,9 @@
 Object for collecitng basic statistics.
 '''
 
+# pylint: disable=too-many-instance-attributes
+
+
 from datetime import datetime
 
 
@@ -38,6 +41,7 @@ class Stats():
         self.end_time = None
         self.source_dirs = 0
         self.source_files = 0
+        self.source_skipped = 0
         self.album_count = 0
         self.track_count = 0
         self.files_written = 0
@@ -48,7 +52,7 @@ class Stats():
         '''
         self.end_time = datetime.now()
 
-    def report(self):
+    def report(self) -> str:
         '''
         Generate a simple report string.
         '''

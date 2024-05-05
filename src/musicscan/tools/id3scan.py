@@ -37,7 +37,7 @@ import argparse
 import os
 import os.path
 import sys
-from tinytag import TinyTag
+from tinytag import TinyTag  # type: ignore
 from musicscan.fileops.scanner import Walker
 from musicscan.fileops.filenames import FilenameMatches
 from musicscan.fileops.xmlwriter import XMLFileWriter

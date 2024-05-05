@@ -28,9 +28,12 @@ Data objects for music.
 
 # pylint: disable=too-few-public-methods
 
+from tinytag import TinyTag  # type: ignore
 import musicscan.data.artist
 import musicscan.data.analyzer
+from musicscan.data.artist import AbstractAlbumArtist
 from musicscan.data.cd import Album
+from musicscan.generic.stats import Stats
 
 
 class Library():
@@ -38,9 +41,9 @@ class Library():
     A completed library of albums that can be iterated against.
     '''
     def __init__(self):
-        self.albums = []
+        self.albums: list[Album] = []
 
-    def add_album(self, in_album):
+    def add_album(self, in_album: Album):
         '''
         Add an album object to the library.
         '''
@@ -59,13 +62,13 @@ class Organizer():
 
     Yes, it's ugly.
     '''
-    def __init__(self, in_library):
+    def __init__(self, in_library: Library):
         self.track_count = 0
         self.library = in_library
-        self.albums = []
-        self.artists = {}
+        self.albums: list[Album] = []
+        self.artists: dict[AbstractAlbumArtist, TinyTag] = {}
 
-    def examine_track(self, in_tag):
+    def examine_track(self, in_tag: TinyTag):
         '''
         Examine a TinyTag and identify both album and artist.
 
@@ -113,7 +116,7 @@ class Organizer():
         for alb in self.albums:
             analyzer.main_test(alb)
 
-    def push_stats(self, in_stats):
+    def push_stats(self, in_stats: Stats):
         '''
         Take a Stats() object and pass data to it.
         '''

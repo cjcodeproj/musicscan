@@ -27,7 +27,9 @@ Testing code to identify possible edit flags.
 '''
 
 import re
+from musicscan.data.cd import Album
 from musicscan.data.flags import FlagCodes
+from musicscan.data.track import Track
 
 
 class Analyzer():
@@ -36,7 +38,7 @@ class Analyzer():
     add flags when appropriate.
     '''
 
-    def main_test(self, in_album):
+    def main_test(self, in_album: Album):
         '''
         Main album testing routine.
         '''
@@ -54,7 +56,7 @@ class Analyzer():
                 self.test_album_track_live(trk)
                 self.test_album_track_blank(trk)
 
-    def check_album_values(self, in_album):
+    def check_album_values(self, in_album: Album):
         '''
         If album values are missing, put in placeholder
         values.
@@ -63,7 +65,7 @@ class Analyzer():
             in_album.title = 'PLACEHOLDER ALBUM TITLE'
             in_album.flags.add_flag(FlagCodes.m_album_title)
 
-    def check_track_values(self, in_track):
+    def check_track_values(self, in_track: Track):
         '''
         If track values are missing, put in placeholder
         values.
@@ -72,7 +74,7 @@ class Analyzer():
             in_track.artist = 'PLACEHOLDER TRACK ARTIST'
             in_track.flags.add_flag(FlagCodes.m_track_artist)
 
-    def test_album_title(self, in_album):
+    def test_album_title(self, in_album: Album):
         '''
         Test album title for keywords that may indicate
         a compilation of some kind.
@@ -84,7 +86,7 @@ class Analyzer():
         if hits_p.search(in_album.title):
             in_album.flags.add_flag(FlagCodes.p_hits_compo)
 
-    def test_soundtrack(self, in_album):
+    def test_soundtrack(self, in_album: Album):
         '''
         Test album title for keywords that may indicate
         a soundtrack album.
@@ -97,7 +99,7 @@ class Analyzer():
             if FlagCodes.p_soundtrack not in in_album.flags.flags:
                 in_album.flags.add_flag(FlagCodes.p_soundtrack)
 
-    def test_score(self, in_album):
+    def test_score(self, in_album: Album):
         '''
         Test album title for keywords that may indicate
         a score album.
@@ -106,7 +108,7 @@ class Analyzer():
         if score_p.search(in_album.title):
             in_album.flags.add_flag(FlagCodes.p_score)
 
-    def test_album_artist(self, in_album):
+    def test_album_artist(self, in_album: Album):
         '''
         Test the name of the artist for indicators
         the band may be a group.
@@ -115,7 +117,7 @@ class Analyzer():
         if and_p.search(str(in_album.artist)):
             in_album.flags.add_flag(FlagCodes.l_group)
 
-    def test_album_track_chrs(self, in_track):
+    def test_album_track_chrs(self, in_track: Track):
         '''
         Test the track title to indicate metadata may
         have been embeded in the track name in parenthesis.
@@ -125,7 +127,7 @@ class Analyzer():
         if '(' in in_track.title or ')' in in_track.title:
             in_track.flags.add_flag(FlagCodes.d_parenthesis)
 
-    def test_album_track_featured(self, in_track):
+    def test_album_track_featured(self, in_track: Track):
         '''
         Test the track title or track artist to see if
         there may be additional artists for this particular track.
@@ -137,7 +139,7 @@ class Analyzer():
         if feature_p.search(in_track.artist) or with_p.search(in_track.artist):
             in_track.flags.add_flag(FlagCodes.p_feat_artist)
 
-    def test_album_track_live(self, in_track):
+    def test_album_track_live(self, in_track: Track):
         '''
         Test the track title to see if it might
         indicate a live recording.
@@ -146,7 +148,7 @@ class Analyzer():
         if live_p.search(in_track.title):
             in_track.flags.add_flag(FlagCodes.p_live)
 
-    def test_track_genre(self, in_track):
+    def test_track_genre(self, in_track: Track):
         '''
         Test the track for bad genre values.
         '''
@@ -154,7 +156,7 @@ class Analyzer():
         if country_p.search(in_track.genre):
             in_track.flags.add_flag(FlagCodes.p_genre_country_folk)
 
-    def test_album_track_demo(self, in_track):
+    def test_album_track_demo(self, in_track: Track):
         '''
         Test the track title to see if it might
         be a demo recording.
@@ -163,7 +165,7 @@ class Analyzer():
         if demo_p.search(in_track.title):
             in_track.flags.add_flag(FlagCodes.p_demo)
 
-    def test_album_track_blank(self, in_track):
+    def test_album_track_blank(self, in_track: Track):
         '''
         Test the track title to see if it might
         be a blank track to pad the CD content.

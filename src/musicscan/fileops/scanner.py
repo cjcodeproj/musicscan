@@ -32,14 +32,15 @@ import os.path
 import time
 from os import listdir
 from os.path import isdir, isfile
+from musicscan.generic.stats import Stats
 
 
 class Walker():
     '''Scans directory for media XML files'''
-    def __init__(self, in_paths, debug=False):
+    def __init__(self, in_paths: list[str], debug: bool = False):
         self.dirs = []
-        self.files = []
-        self.skipped = []
+        self.files: list[str] = []
+        self.skipped: list[str] = []
         self.elapsed = None
         self.match_re = None
         self.debug = debug
@@ -63,18 +64,18 @@ class Walker():
         tend = time.time()
         self.elapsed = tend - tstart
 
-    def name_match(self, in_filename):
+    def name_match(self, in_filename: str) -> bool:
         '''Test a filename to ensure it matches our search pattern'''
         if self.match_re:
             if self.match_re.search(in_filename):
                 return True
         return False
 
-    def stats(self):
+    def stats(self) -> str:
         '''Simple statistical output'''
         return f"{len(self.dirs)} {len(self.files)} {len(self.skipped)}"
 
-    def pass_stats(self, stats):
+    def pass_stats(self, stats: Stats):
         '''
         Update the stats object with information on
         file scanning operation.
@@ -83,7 +84,7 @@ class Walker():
         stats.source_files = len(self.files)
         stats.source_skipped = len(self.skipped)
 
-    def report(self):
+    def report(self) -> str:
         '''More detailed report of scanner operations'''
         out = "Stats\n-----\n"
         out += f"Directory Count   : {len(self.dirs)}\n"

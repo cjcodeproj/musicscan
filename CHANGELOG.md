@@ -1,6 +1,9 @@
 musicscan CHANGELOG
 ======================
 
+## CURRENT
+ - [musicscan-31](https://github.com/cjcodeproj/musicscan/issues/31) Static typing
+
 ## RELEASE 0.1.3
  - [musicscan-26](https://github.com/cjcodeproj/musicscan/issues/26) Release 0.1.3
  - [musicscan-25](https://github.com/cjcodeproj/musicscan/issues/25) Consider editing documentation

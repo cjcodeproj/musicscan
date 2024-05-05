@@ -42,13 +42,13 @@ class Flags():
     def __init__(self):
         self.flags = []
 
-    def add_flag(self, in_code):
+    def add_flag(self, in_code: int):
         '''
         Add a FlagCode to the array.
         '''
         self.flags.append(in_code)
 
-    def to_xml_comment(self):
+    def to_xml_comment(self) -> str:
         '''
         Convert each flag code to an XML comment string value.
         '''
@@ -82,7 +82,7 @@ class FlagCodes():
     m_track_artist = 63
 
     @classmethod
-    def to_str(cls, in_code):
+    def to_str(cls, in_code: int) -> str:
         '''
         Convert a flag value to a usable string.
         '''

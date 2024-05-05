@@ -38,7 +38,7 @@ class AbstractAlbumArtist():
     def __init__(self):
         self.name = None
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(self.name)
 
 
@@ -46,11 +46,11 @@ class AlbumArtist(AbstractAlbumArtist):
     '''
     Class to represent a single album artist (either band or individual)
     '''
-    def __init__(self, in_name):
+    def __init__(self, in_name: str):
         super().__init__()
         self.name = in_name
 
-    def to_xml(self):
+    def to_xml(self) -> str:
         '''
         Return the value as an XML chunk.
         '''
@@ -65,7 +65,7 @@ class AlbumVariousArtists(AbstractAlbumArtist):
         super().__init__()
         self.name = 'Various Artists'
 
-    def to_xml(self):
+    def to_xml(self) -> str:
         '''
         Return the value as an XML chunk.
         '''
