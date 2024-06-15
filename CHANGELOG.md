@@ -2,6 +2,7 @@ musicscan CHANGELOG
 ======================
 
 ## CURRENT
+ - [musicscan-39](https://github.com/cjcodeproj/musicscan/issues/39) Updates to Editing document
  - [musicscan-31](https://github.com/cjcodeproj/musicscan/issues/31) Static typing
 
 ## RELEASE 0.1.3
