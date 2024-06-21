@@ -2,6 +2,7 @@ musicscan CHANGELOG
 ======================
 
 ## CURRENT
+ - [musicscan-41](https://github.com/cjcodeproj/musicscan/issues/41) Output header at top of run
  - [musicscan-39](https://github.com/cjcodeproj/musicscan/issues/39) Updates to Editing document
  - [musicscan-31](https://github.com/cjcodeproj/musicscan/issues/31) Static typing
 

@@ -41,7 +41,7 @@ class Walker():
         self.dirs = []
         self.files: list[str] = []
         self.skipped: list[str] = []
-        self.elapsed = None
+        self.elapsed: float = 0
         self.match_re = None
         self.debug = debug
         self.dirs.append(in_paths[0])

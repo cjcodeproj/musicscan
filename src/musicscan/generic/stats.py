@@ -38,13 +38,14 @@ class Stats():
     '''
     def __init__(self):
         self.start_time = datetime.now()
-        self.end_time = None
+        self.end_time = datetime.now()
         self.source_dirs = 0
         self.source_files = 0
         self.source_skipped = 0
         self.album_count = 0
         self.track_count = 0
         self.files_written = 0
+        self.process_id = 0
 
     def close(self):
         '''
@@ -52,15 +53,27 @@ class Stats():
         '''
         self.end_time = datetime.now()
 
+    def header(self) -> str:
+        '''
+        Generate a simple run header.
+        '''
+        out = ''
+        out += "\n\n"
+        out += "===================================\n"
+        out += " --- Program Start ---\n"
+        out += "===================================\n"
+        out += f"{'Start Time':20s}: {self.start_time}\n"
+        out += f"{'Process Id':20s}: {self.process_id}\n\n"
+        return out
+
     def report(self) -> str:
         '''
         Generate a simple report string.
         '''
-        out = ''
-        out += "\nTimes\n=====\n"
-        out += f"{'Start Time':20s}: {self.start_time}\n"
-        out += f"{'End Time':20s}: {self.end_time}\n"
-        out += f"{'Run Duration':20s}: {self.end_time - self.start_time}\n"
+        out = "\n\n"
+        out += "===================================\n"
+        out += " --- Operations Statistics ---\n"
+        out += "===================================\n"
         out += "\nInput Files\n===========\n"
         out += f"{'Directories Scanned':20s}: {self.source_dirs}\n"
         out += f"{'Files Scanned':20s}: {self.source_files}\n"
@@ -69,5 +82,13 @@ class Stats():
         out += f"{'Total Tracks':20s}: {self.track_count}\n"
         out += "\nOutput Files\n============\n"
         out += f"{'Files Written':20s}: {self.files_written}\n"
-        out += "\n"
+        out += "\nTimes\n=====\n"
+        out += f"{'Start Time':20s}: {self.start_time}\n"
+        out += f"{'End Time':20s}: {self.end_time}\n"
+        out += f"{'Run Duration':20s}: {self.end_time - self.start_time}\n"
+        out += f"{'Process Id':20s}: {self.process_id}\n"
+        out += "\n\n"
+        out += "===================================\n"
+        out += " --- Program End ---\n"
+        out += "===================================\n"
         return out

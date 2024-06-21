@@ -36,7 +36,7 @@ class AbstractAlbumArtist():
     Abtract class to represent an album artist.
     '''
     def __init__(self):
-        self.name = None
+        self.name = ''
 
     def __str__(self) -> str:
         return str(self.name)

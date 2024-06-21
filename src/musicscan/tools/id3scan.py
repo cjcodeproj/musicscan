@@ -155,6 +155,8 @@ if __name__ == '__main__':
             parser.print_help()
             sys.exit(2)
     stats = Stats()
+    stats.process_id = os.getpid()
+    print(stats.header())
     all_files = get_files(musicpath, stats)
     data = scan_files(all_files)
     library = Library()

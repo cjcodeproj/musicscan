@@ -27,6 +27,7 @@ Data objects for music.
 '''
 
 # pylint: disable=too-few-public-methods
+# pylint: disable=consider-using-dict-items
 
 from tinytag import TinyTag  # type: ignore
 import musicscan.data.artist
