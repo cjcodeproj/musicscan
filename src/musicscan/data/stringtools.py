@@ -54,7 +54,7 @@ def build_complete_filename(in_album, in_suffix: str = 'audiocd') -> str:
     art = build_filename_string(in_album.artist.name)
     alb = build_filename_string(in_album.title)
     year = in_album.first_track().year
-    name = f"{art}_{alb}-{year}-{in_suffix}.xml"
+    name = f"{art}-{alb}-{year}-{in_suffix}.xml"
     return name
 
 
