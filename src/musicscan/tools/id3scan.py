@@ -91,7 +91,7 @@ def report_xml_files(in_args, in_organizer):
     print("\nExisting XML Files\n------------------\n")
     for alxml in done:
         print(alxml)
-    print("\nNon-existing XML files\n--------------\n")
+    print("\nNon-existing XML files\n----------------------\n")
     for alxml in not_done:
         print(alxml)
 

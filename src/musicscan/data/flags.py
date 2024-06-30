@@ -48,15 +48,18 @@ class Flags():
         '''
         self.flags.append(in_code)
 
-    def to_xml_comment(self) -> str:
+    def to_xml_comment(self, in_padding: int = 3) -> str:
         '''
         Convert each flag code to an XML comment string value.
         '''
+        p_str = ''
+        if in_padding > 0:
+            p_str = f"{' ' * in_padding}"
         if len(self.flags) > 0:
             flag_string = ''
             for f_code in self.flags:
                 flag_string += FlagCodes.to_str(f_code) + ' '
-            return f"<!-- EDIT FLAGS: {flag_string} -->\n"
+            return f"{p_str}<!-- EDIT FLAGS: {flag_string} -->\n"
         return ''
 
 

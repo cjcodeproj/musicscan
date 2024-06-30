@@ -2,6 +2,7 @@ musicscan CHANGELOG
 ======================
 
 ## CURRENT
+ - [musicscan-35](https://github.com/cjcodeproj/musicscan/issues/35) XML tag spacing match
  - [musicscan-43](https://github.com/cjcodeproj/musicscan/issues/43) Filename artist and album separator should be a dash not an underscore
  - [musicscan-41](https://github.com/cjcodeproj/musicscan/issues/41) Output header at top of run
  - [musicscan-39](https://github.com/cjcodeproj/musicscan/issues/39) Updates to Editing document
