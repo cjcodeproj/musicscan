@@ -96,7 +96,9 @@ class Album():
         Return the very first track of the album.
         '''
         # return self.discs[1].tracks[0]
-        return self._first_disc.first_track()
+        if self._first_disc:
+            return self._first_disc.first_track()
+        return None
 
     def tracks_in_order(self):
         '''

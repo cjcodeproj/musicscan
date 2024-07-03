@@ -69,7 +69,7 @@ your scanning operation.
 The program will output statistics on how many files it discovered, and how many files it has
 created.  It will also provide a list of all of the files created.
 
-The output XML files are designed to be rough drafts of the final data.  For example, the 
+The output XML files are designed to be rough drafts of the final data.  For example, the
 ID3 tag for a song artist doesn't identify whether the value is a single artist, a group,
 or multiple artists.  The XML schema allows for clarity where the data can be edited to
 correctly identify multiple artists, or distinguish between an individual artist and a group.
@@ -100,7 +100,7 @@ how the software has interpreted the metadata
     metadata could be embedded in the title.
 
 ``detected_parenthesis``
-    Parenthesis were detected in the title of the track, suggesting a 
+    Parenthesis were detected in the title of the track, suggesting a
     possible sub-title, or additional metadata embedded in the title.
 
 ``likely_group_artist``

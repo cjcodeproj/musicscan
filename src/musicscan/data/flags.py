@@ -42,21 +42,24 @@ class Flags():
     def __init__(self):
         self.flags = []
 
-    def add_flag(self, in_code):
+    def add_flag(self, in_code: int):
         '''
         Add a FlagCode to the array.
         '''
         self.flags.append(in_code)
 
-    def to_xml_comment(self):
+    def to_xml_comment(self, in_padding: int = 3) -> str:
         '''
         Convert each flag code to an XML comment string value.
         '''
+        p_str = ''
+        if in_padding > 0:
+            p_str = f"{' ' * in_padding}"
         if len(self.flags) > 0:
             flag_string = ''
             for f_code in self.flags:
                 flag_string += FlagCodes.to_str(f_code) + ' '
-            return f"<!-- EDIT FLAGS: {flag_string} -->\n"
+            return f"{p_str}<!-- EDIT FLAGS: {flag_string} -->\n"
         return ''
 
 
@@ -75,6 +78,7 @@ class FlagCodes():
     p_live = 31
     p_demo = 32
     p_blank_track = 40
+    p_bonus_track = 41
     p_genre_country_folk = 50
     m_year = 60
     m_title = 61
@@ -82,7 +86,7 @@ class FlagCodes():
     m_track_artist = 63
 
     @classmethod
-    def to_str(cls, in_code):
+    def to_str(cls, in_code: int) -> str:
         '''
         Convert a flag value to a usable string.
         '''
@@ -97,6 +101,7 @@ class FlagCodes():
                   FlagCodes.p_live: 'possible_live_performance',
                   FlagCodes.p_demo: 'possible_demo_performance',
                   FlagCodes.p_blank_track: 'possible_blank_track',
+                  FlagCodes.p_bonus_track: 'possible_bonus_track',
                   FlagCodes.p_genre_country_folk:
                   'country_and_folk_genre_is_too_vague',
                   FlagCodes.m_year: 'missing_copyright_year',

@@ -32,7 +32,7 @@ import string
 UNICODE_SQ = "\u2018\u2019\u201c\u201d"
 
 
-def transform_string(in_value):
+def transform_string(in_value: str) -> str:
     '''Low level change to remove all punctuation from a string.'''
     if in_value is not None:
         no_punctuation = drop_punct(in_value)
@@ -40,35 +40,37 @@ def transform_string(in_value):
     return "SHOULDNT BE HERE"
 
 
-def build_filename_string(in_value):
+def build_filename_string(in_value: str) -> str:
     '''Convert all whitespace into underscores suitable for a filename'''
     level1 = transform_string(in_value)
     level2 = level1.translate(level1.maketrans(" \t\n\r", "____"))
     return level2.replace("__", "_")
 
 
-def build_complete_filename(in_album, in_suffix='audiocd'):
+def build_complete_filename(in_album, in_suffix: str = 'audiocd') -> str:
     '''
     Build the proper filename for an output file.
     '''
     art = build_filename_string(in_album.artist.name)
     alb = build_filename_string(in_album.title)
     year = in_album.first_track().year
-    name = f"{art}_{alb}-{year}-{in_suffix}.xml"
+    name = f"{art}-{alb}-{year}-{in_suffix}.xml"
     return name
 
 
-def sanitize_year(in_year):
+def sanitize_year(in_year: str) -> str:
     '''
     Ensure a year value either matches the correct pattern,
     or a year value can be extracted.
     '''
     year_p = re.compile(r'\d\d\d\d')
     mtch = year_p.match(in_year)
-    return mtch.group(0) or "UNKN"
+    if mtch:
+        return mtch.group(0)
+    return 'UNKN'
 
 
-def sanitize_for_xml(in_string):
+def sanitize_for_xml(in_string: str) -> str:
     '''
     Fix a string so it is suitable to go into
     XML output.
@@ -80,14 +82,14 @@ def sanitize_for_xml(in_string):
     return out
 
 
-def transform_ampersand(in_value):
+def transform_ampersand(in_value: str) -> str:
     '''
     Simple function to transform an ampersand.
     '''
     return in_value.replace("&", "&amp;")
 
 
-def drop_punct(in_str):
+def drop_punct(in_str: str) -> str:
     '''
     Remove all punctuation symbols from a string.
 

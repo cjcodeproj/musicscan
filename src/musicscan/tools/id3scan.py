@@ -37,7 +37,7 @@ import argparse
 import os
 import os.path
 import sys
-from tinytag import TinyTag
+from tinytag import TinyTag  # type: ignore
 from musicscan.fileops.scanner import Walker
 from musicscan.fileops.filenames import FilenameMatches
 from musicscan.fileops.xmlwriter import XMLFileWriter
@@ -91,7 +91,7 @@ def report_xml_files(in_args, in_organizer):
     print("\nExisting XML Files\n------------------\n")
     for alxml in done:
         print(alxml)
-    print("\nNon-existing XML files\n--------------\n")
+    print("\nNon-existing XML files\n----------------------\n")
     for alxml in not_done:
         print(alxml)
 
@@ -155,6 +155,8 @@ if __name__ == '__main__':
             parser.print_help()
             sys.exit(2)
     stats = Stats()
+    stats.process_id = os.getpid()
+    print(stats.header())
     all_files = get_files(musicpath, stats)
     data = scan_files(all_files)
     library = Library()

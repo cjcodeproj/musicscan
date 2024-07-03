@@ -7,6 +7,15 @@ This document provides basic information on how to edit the XML to make it more 
 More detailed documentation on the element structures can be found in the vtmedia-schema documentation, or in the
 example files that come with the schema.
 
+ * [Names](#names)
+     * [Individual Names](#individual-names)
+     * [Group Names](#group-names)
+     * [Multiple Entries](#multiple-entries)
+ * [Non-Songs](#non-songs)
+ * [Live Performances](#live-performances)
+ * [File Directory Structure](#file-directory-structure)
+     * [Albums By Artist](#albums-by-artist)
+
 ## Names
 
 All names whether they belong to a group or an individual in the XML are contained in the `<unkn>` element, which is a catch
@@ -54,7 +63,7 @@ be used, but it can only be applied after the main `<artist>` element.
 
 If a track on an album is just dialogue, with no music, the `<song>` element can be converted to a `<dialogue>` element.
 
-## Live Recordings
+## Live Performances
 
 If the track on an album is a live recording (instead of a studio recording), the `<studioRecording>` element can be
 converted to a `<liveRecording>` element.  If the `title/main` element of the track contains extra information to convey
@@ -62,8 +71,35 @@ that it's a live recording, it can be removed.
 
 | id3scan Entry | Corrected Entry |
 |---------------|-----------------|
-| `<main>Takin' Care Of Business (Live)</main>` | `<main>Takin' Care Of Business</main>` |
+| `<main>`Takin' Care Of Business (Live)`</main>` | `<main>`Takin' Care Of Business`</main>` |
 | `<studioRecording/>` | `<liveRecording/>` |
 
 If the entire album is a concert recording, the `<livePerformance/>` element can be added to
-the `<classificaiton>` element.
+the `<classification>` element.
+
+## File Directory Structure
+
+Large libraries will be easier to manage if files are organized into subdirectories of your repository.
+
+
+### Albums By Artist
+
+For albums by a single artist, create a directory structure based on the artist name.  If the artist 
+is an individual, the directory structure should follow the last name.  The structure doesn't 
+actually matter, but using a combination of the first two letters of the name followed by the last
+letter in the name is a structure that guarauntees a certain level of randomness.
+
+When the files are moved to the correct directory, the artist name should be removed from the filename
+to make it more recognizable.
+
+| Output File | Artist Name | Directory | Song File | Full Path |
+|-------------|-------------|-----------|------|-----------|
+| `gary_allan_used_heart_for_sale-1996-*.xml` | Gary Allan | `artists/a/aln/gary_allan` | `used_heart_for_sale-1996-*.xml` | `artists/a/aln/gary_allan/used_heart_for_sale-1996-*.xml` |
+| `aerosmith_gems-1988-*.xml` | Aerosmith | `artists/a/aeh/aerosmith` | `gems-1988-*.xml` | `artists/a/aeh/aerosmith/gems-1988-*.xml` |
+
+If the artist name is actually a pairing of names, then use the last name of the first artist.
+
+| Output File | Artist Name | Directory | Song File | Full Path |
+|-------------|-------------|-----------|------|-----------|
+| `foster_lloyd_version_of_the_truth-1990-*.xml` | Radney Foster, Bill Lloyd | `artists/f/for/foster_lloyd` | `version_of_the_truth-1990-*.xml` | `artists/f/for/foster_lloyd\version_of_the_truth-1990-*.xml`  |
+| `randy_rogers_wade_bowen_hold_my_beer_vol_1-2015-*.xml` | Randy Rogers, Wade Bowen | `artists/r/ros/randy_rogers_wade_bowen` | `hold_my_beer_vol_1-2015-*.xml` | `artists/r/ros/randy_rogers_wade_bowen\hold_my_beer_vol_1-2015-*.xml` |
