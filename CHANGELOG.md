@@ -1,7 +1,8 @@
 musicscan CHANGELOG
 ======================
 
-## CURRENT
+## RELEASE 0.1.5
+ - [musicscan-46](https://github.com/cjcodeproj/musicscan/issues/46) Release 0.1.5
  - [musicscan-34](https://github.com/cjcodeproj/musicscan/issues/34) Flag for bonus tracks
  - [musicscan-37](https://github.com/cjcodeproj/musicscan/issues/37) Country and Folk edit flag is broken
  - [musicscan-44](https://github.com/cjcodeproj/musicscan/issues/44) Typing bug with sanitize_for_xml
@@ -10,6 +11,7 @@ musicscan CHANGELOG
  - [musicscan-41](https://github.com/cjcodeproj/musicscan/issues/41) Output header at top of run
  - [musicscan-39](https://github.com/cjcodeproj/musicscan/issues/39) Updates to Editing document
  - [musicscan-31](https://github.com/cjcodeproj/musicscan/issues/31) Static typing
+
 
 ## RELEASE 0.1.3
  - [musicscan-26](https://github.com/cjcodeproj/musicscan/issues/26) Release 0.1.3
