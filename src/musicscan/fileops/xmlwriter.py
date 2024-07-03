@@ -28,7 +28,7 @@ Write out XML data for an album.
 
 import os.path
 from musicscan.xml.builder import (CompleteCompactDiscXML,
-                                   SplitCompactDiscXML, Index, Album)
+                                   SplitCompactDiscXML, Index, AlbumElementXML)
 
 
 class XMLFileWriter():
@@ -155,7 +155,7 @@ class XMLFileWriter():
         Write out the XML data pertaining to the album contents.
         '''
         complete = self._path + '/' + in_album.filename('album')
-        album = Album(self._debug)
+        album = AlbumElementXML(self._debug)
         if not os.path.isfile(complete) or self._overwrite:
             with open(complete, mode='w', encoding='utf-8') as f_handle:
                 f_handle.write(album.build_standalone_album(in_album))

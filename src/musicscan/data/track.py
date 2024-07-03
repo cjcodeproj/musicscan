@@ -28,9 +28,16 @@ Data objects for music.
 
 # pylint: disable=too-many-instance-attributes
 
+from __future__ import annotations
 from datetime import timedelta
+from typing import TYPE_CHECKING
+from tinytag import TinyTag  # type: ignore
 from musicscan.data.flags import Flags, FlagCodes
 from musicscan.data.stringtools import sanitize_year
+
+
+if TYPE_CHECKING:
+    from musicscan.data.cd import Album
 
 
 class Track():
@@ -38,11 +45,11 @@ class Track():
     A track identifies a single musical track on an album,
     created through ID3 data.
     '''
-    def __init__(self, in_tag):
+    def __init__(self, in_tag: TinyTag):
         self.title = ''
         self.artist = ''
         self.album = ''
-        self.album_o = None
+        self.album_o: Album | None = None
         self.track_no = 0
         self.track_total = 0
         self.disc_no = 0
@@ -53,10 +60,10 @@ class Track():
         self.composer = ''
         self.year = '0000'
         self.flags = Flags()
-        self.indices = []
+        # self.indices = []
         self._process(in_tag)
 
-    def _process(self, in_tag):
+    def _process(self, in_tag: TinyTag):
         self.title = in_tag.title
         self.genre = in_tag.genre
         self.artist = in_tag.artist
@@ -75,7 +82,7 @@ class Track():
         else:
             self.flags.add_flag(FlagCodes.m_year)
 
-    def _process_integer_values(self, in_tag):
+    def _process_integer_values(self, in_tag: TinyTag):
         '''
         Process integer values and make sure they are valid.
         '''
@@ -88,7 +95,7 @@ class Track():
         if in_tag.disc_total:
             self.disc_total = int(in_tag.disc_total)
 
-    def set_album_object(self, in_album_object):
+    def set_album_object(self, in_album_object: Album):
         '''
         The album object is a reference back to the object that
         contains the track.
@@ -96,7 +103,7 @@ class Track():
         self.album_o = in_album_object
 
     @classmethod
-    def _make_iso_interval(cls, in_delta):
+    def _make_iso_interval(cls, in_delta: timedelta):
         '''
         Generate an ISO duration value based on
         a Python timedelta object.
@@ -107,24 +114,24 @@ class Track():
         seconds = float(fld[2])
         return f"PT{minutes}M{seconds:.2f}S"
 
-    def get_album_artist(self):
+    def get_album_artist(self) -> str:
         '''
         Return an artist value, whether it exists or not.
         '''
         return self.album_artist or self.artist
 
-    def track_id(self):
+    def track_id(self) -> str:
         '''
         Return track information.
         '''
         return f"[ {self.track_no:02d} / {self.track_total:02d} " +\
                f" {self.disc_no} / {self.disc_total} ]"
 
-    def __lt__(self, other):
+    def __lt__(self, other) -> bool:
         return self.track_no < other.track_no
 
-    def __rt__(self, other):
+    def __rt__(self, other) -> bool:
         return self.track_no > other.track_no
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.track_id()} {self.title} ({self.artist})"

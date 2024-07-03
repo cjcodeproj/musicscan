@@ -41,7 +41,7 @@ class ShortTitleIndex():
     def __init__(self):
         self.t_list = {}
 
-    def add(self, new_object):
+    def add(self, new_object: 'ShortTitle'):
         '''
         Try and add the short title to the index.
         If the new value conflicts, force the
@@ -86,12 +86,12 @@ class ShortTitle():
     automatically increased to guarauntee
     a unique value.
     '''
-    def __init__(self, in_title, in_index):
+    def __init__(self, in_title: str, in_index: ShortTitleIndex):
         self.text = ''
         self.index = 1
         self._process(in_title, in_index)
 
-    def _process(self, in_title, in_index):
+    def _process(self, in_title: str, in_index: ShortTitleIndex):
         '''
         Check the index to ensure it has
         a unique value against other tracks.
@@ -99,7 +99,7 @@ class ShortTitle():
         self.text = self._build_str(in_title)
         in_index.add(self)
 
-    def _build_str(self, in_title):
+    def _build_str(self, in_title: str):
         '''
         Ensure a short string is properly
         created based on the title of the
@@ -125,7 +125,7 @@ class ShortTitle():
         '''
         self.index += 1
 
-    def __str__(self):
+    def __str__(self) -> str:
         if self.text[-1].isdigit():
             return f"{self.text}-{self.index:02d}"
         return f"{self.text}{self.index:02d}"
