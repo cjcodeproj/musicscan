@@ -54,6 +54,7 @@ class Analyzer():
                 self.test_album_track_chrs(trk)
                 self.test_album_track_featured(trk)
                 self.test_album_track_live(trk)
+                self.test_track_genre(trk)
                 self.test_album_track_blank(trk)
 
     def check_album_values(self, in_album: Album):
@@ -153,8 +154,9 @@ class Analyzer():
         Test the track for bad genre values.
         '''
         country_p = re.compile(r'Country & Folk', re.IGNORECASE)
-        if country_p.search(in_track.genre):
-            in_track.flags.add_flag(FlagCodes.p_genre_country_folk)
+        if in_track.genre:
+            if country_p.search(in_track.genre):
+                in_track.flags.add_flag(FlagCodes.p_genre_country_folk)
 
     def test_album_track_demo(self, in_track: Track):
         '''
