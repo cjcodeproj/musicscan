@@ -78,6 +78,7 @@ class FlagCodes():
     p_live = 31
     p_demo = 32
     p_blank_track = 40
+    p_bonus_track = 41
     p_genre_country_folk = 50
     m_year = 60
     m_title = 61
@@ -100,6 +101,7 @@ class FlagCodes():
                   FlagCodes.p_live: 'possible_live_performance',
                   FlagCodes.p_demo: 'possible_demo_performance',
                   FlagCodes.p_blank_track: 'possible_blank_track',
+                  FlagCodes.p_bonus_track: 'possible_bonus_track',
                   FlagCodes.p_genre_country_folk:
                   'country_and_folk_genre_is_too_vague',
                   FlagCodes.m_year: 'missing_copyright_year',

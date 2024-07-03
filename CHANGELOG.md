@@ -2,6 +2,7 @@ musicscan CHANGELOG
 ======================
 
 ## CURRENT
+ - [musicscan-34](https://github.com/cjcodeproj/musicscan/issues/34) Flag for bonus tracks
  - [musicscan-37](https://github.com/cjcodeproj/musicscan/issues/37) Country and Folk edit flag is broken
  - [musicscan-44](https://github.com/cjcodeproj/musicscan/issues/44) Typing bug with sanitize_for_xml
  - [musicscan-35](https://github.com/cjcodeproj/musicscan/issues/35) XML tag spacing match

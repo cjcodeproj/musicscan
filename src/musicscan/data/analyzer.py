@@ -56,6 +56,7 @@ class Analyzer():
                 self.test_album_track_live(trk)
                 self.test_track_genre(trk)
                 self.test_album_track_blank(trk)
+                self.test_album_track_bonus(trk)
 
     def check_album_values(self, in_album: Album):
         '''
@@ -175,3 +176,13 @@ class Analyzer():
         blank_p = re.compile(r'Blank', re.IGNORECASE)
         if blank_p.search(in_track.title):
             in_track.flags.add_flag(FlagCodes.p_blank_track)
+
+    def test_album_track_bonus(self, in_track: Track):
+        '''
+        Test the track title to see if it might
+        indicate the track is a bonus track
+        (which could also indicate a re-issue)
+        '''
+        bonus_p = re.compile(r'\W+Bonus', re.IGNORECASE)
+        if bonus_p.search(in_track.title):
+            in_track.flags.add_flag(FlagCodes.p_bonus_track)
