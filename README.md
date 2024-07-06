@@ -52,10 +52,11 @@ $ ls -1 "~/Music/iTunes/iTunes Media/Music/Garth Brooks/No Fences/"
 10 Wolves.m4a
 ```
 
-The `id3scan` tool will search that directory and create three files.
+The `id3scan` tool will search that directory and create three files.  Make sure the install path for the id3scan tool
+matches your environment command path.
 
 ```
-$ python3 -m musicscan.tools.id3scan --musicpath "~/Music/iTunes/iTunes Media/Music/Garth Brooks/No Fences" --write --outdir ~/tmp --split-xml
+$ id3scan --musicpath "~/Music/iTunes/iTunes Media/Music/Garth Brooks/No Fences" --write --outdir ~/tmp --split-xml
 ```
 
 ```

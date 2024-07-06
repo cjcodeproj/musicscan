@@ -1,6 +1,10 @@
 musicscan CHANGELOG
 ======================
 
+## CURRENT
+ - [musicscan-49](https://github.com/cjcodeproj/musicscan/issues/49) id3scan shou;d be a bin tool
+
+
 ## RELEASE 0.1.5
  - [musicscan-46](https://github.com/cjcodeproj/musicscan/issues/46) Release 0.1.5
  - [musicscan-34](https://github.com/cjcodeproj/musicscan/issues/34) Flag for bonus tracks

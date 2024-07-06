@@ -5,14 +5,14 @@ musisscan.tools.id3scan
 NAME
 ----
 
-musicscan.tools.id3scan - scan files for ID3 metadata to build XML structures
+id3scan - scan files for ID3 metadata to build XML structures
 
 SYNOPSIS
 --------
 
 ::
 
-  python -m musicscan.tools.id3scan [-h] [--musicpath PATH]
+  id3scan [-h] [--musicpath PATH]
          [--outdir PATH]
          [--write/--no-write]
          [--split-xml/--no-split-xml]
