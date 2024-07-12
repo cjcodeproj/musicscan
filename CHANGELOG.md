@@ -2,7 +2,8 @@ musicscan CHANGELOG
 ======================
 
 ## CURRENT
- - [musicscan-49](https://github.com/cjcodeproj/musicscan/issues/49) id3scan shou;d be a bin tool
+ - [musicscan-22](https://github.com/cjcodeproj/musicscan/issues/22) Flag codes should probably be distinct between album and song
+ - [musicscan-49](https://github.com/cjcodeproj/musicscan/issues/49) id3scan should be a bin tool
 
 
 ## RELEASE 0.1.5
