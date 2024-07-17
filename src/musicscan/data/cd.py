@@ -28,7 +28,8 @@ Data objects for music.
 
 # pylint: disable=too-many-instance-attributes
 
-from musicscan.data.flags import AlbumFlags, TrackFlagCodes
+from musicscan.data.flags import AlbumFlags
+from musicscan.data.flagcodes import TrackFlagCodes
 from musicscan.data.titletools import ShortTitleIndex, ShortTitle
 from musicscan.data.track import Track
 from musicscan.data.stringtools import build_complete_filename

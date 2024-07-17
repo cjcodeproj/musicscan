@@ -2,6 +2,7 @@ musicscan CHANGELOG
 ======================
 
 ## CURRENT
+ - [musicscan-51](https://github.com/cjcodeproj/musicscan/issues/51) Edit flag for Intro and Reprise
  - [musicscan-22](https://github.com/cjcodeproj/musicscan/issues/22) Flag codes should probably be distinct between album and song
  - [musicscan-49](https://github.com/cjcodeproj/musicscan/issues/49) id3scan should be a bin tool
 

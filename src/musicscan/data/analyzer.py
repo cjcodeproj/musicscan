@@ -26,6 +26,8 @@
 Testing code to identify possible edit flags.
 '''
 
+# pylint: disable=too-many-public-methods
+
 import re
 from musicscan.data.cd import Album
 from musicscan.data.flags import AlbumFlagCodes, TrackFlagCodes
@@ -44,6 +46,7 @@ class Analyzer():
         '''
         self.album_tests(in_album)
         self.track_tests(in_album)
+        self.album_closing_tests(in_album)
 
     def album_tests(self, in_album: Album):
         '''
@@ -70,6 +73,15 @@ class Analyzer():
                 self.test_track_genre(trk)
                 self.test_album_track_blank(trk)
                 self.test_album_track_bonus(trk)
+                self.test_album_track_intro(trk)
+                self.test_album_track_reprise(trk)
+
+    def album_closing_tests(self, in_album: Album):
+        '''
+        Perform additional tests after all
+        tracks are analzed.
+        '''
+        self.test_intro_reprise_presence(in_album)
 
     def check_album_values(self, in_album: Album):
         '''
@@ -208,3 +220,41 @@ class Analyzer():
         bonus_p = re.compile(r'\W+Bonus', re.IGNORECASE)
         if bonus_p.search(in_track.title):
             in_track.flags.add_flag(TrackFlagCodes.p_bonus_track)
+
+    def test_album_track_intro(self, in_track: Track):
+        '''
+        Test the track to see if it is an introduction to
+        another track, or possibly for the album itself.
+        '''
+        intro_p = re.compile(r'[\s\W]?Intro', re.IGNORECASE)
+        if intro_p.search(in_track.title):
+            in_track.flags.add_flag(TrackFlagCodes.p_intro)
+
+    def test_album_track_reprise(self, in_track: Track):
+        '''
+        Test the track to see if it is labeled as a
+        reprise, either to the album, or to a previous
+        track on the album.
+        '''
+        reprise_p = re.compile(r'[\s\W]?Reprise', re.IGNORECASE)
+        if reprise_p.search(in_track.title):
+            in_track.flags.add_flag(TrackFlagCodes.p_reprise)
+
+    def test_intro_reprise_presence(self, in_album: Album):
+        '''
+        Test to see if both an intro and reprise is
+        contained in the album, and add an additional
+        album level flag to identify it.
+        '''
+        reprise = False
+        intro = False
+        for dsc in sorted(in_album.discs):
+            for trk in sorted(in_album.discs[dsc].tracks,
+                              key=lambda x: x.track_no):
+                if TrackFlagCodes.p_intro in trk.flags:
+                    intro = True
+                if TrackFlagCodes.p_reprise in trk.flags:
+                    reprise = True
+                if intro and reprise:
+                    in_album.flags.add_flag(AlbumFlagCodes.p_intro_reprise)
+                    break

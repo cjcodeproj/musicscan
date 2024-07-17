@@ -32,6 +32,8 @@ more flags that will be output as an XML comment with the XML elements.
 
 # pylint: disable=R0903
 
+from musicscan.data.flagcodes import AlbumFlagCodes, TrackFlagCodes
+
 
 class AlbumFlags():
     '''
@@ -41,6 +43,9 @@ class AlbumFlags():
     '''
     def __init__(self):
         self.flags = []
+
+    def __contains__(self, in_flag: AlbumFlagCodes):
+        return in_flag in self.flags
 
     def add_flag(self, in_code: int):
         '''
@@ -72,6 +77,9 @@ class TrackFlags():
     def __init__(self):
         self.flags = []
 
+    def __contains__(self, in_flag: TrackFlagCodes):
+        return in_flag in self.flags
+
     def add_flag(self, in_code: int):
         '''
         Add a FlagCode to the array.
@@ -90,71 +98,4 @@ class TrackFlags():
             for f_code in self.flags:
                 flag_string += TrackFlagCodes.to_str(f_code) + ' '
             return f"{p_str}<!-- EDIT FLAGS: {flag_string} -->\n"
-        return ''
-
-
-class AlbumFlagCodes():
-    '''
-    All flag codes related to albums.
-    '''
-    p_greatest = 1
-    p_hits_compo = 2
-    p_soundtrack = 3
-    p_score = 4
-    p_tribute = 5
-
-    @classmethod
-    def to_str(cls, in_code: int) -> str:
-        '''
-        Convert an album flag code to a usable string.
-        '''
-        matrix = {AlbumFlagCodes.p_greatest: 'possible_greatest_hits',
-                  AlbumFlagCodes.p_hits_compo: 'possible_hits_compilation',
-                  AlbumFlagCodes.p_soundtrack: 'possible_soundtrack',
-                  AlbumFlagCodes.p_score: 'possible_score',
-                  AlbumFlagCodes.p_tribute: 'possible_tribute'}
-        if in_code in matrix:
-            return matrix[in_code]
-        return ''
-
-
-class TrackFlagCodes():
-    '''
-    All flag codes related to tracks.
-    '''
-    d_sq_brackets = 110
-    d_parenthesis = 111
-    l_group = 120
-    p_feat_artist = 130
-    p_live = 131
-    p_demo = 132
-    p_blank_track = 140
-    p_bonus_track = 141
-    p_genre_country_folk = 150
-    m_year = 160
-    m_title = 161
-    m_album_title = 162
-    m_track_artist = 163
-
-    @classmethod
-    def to_str(cls, in_code: int) -> str:
-        '''
-        Convert a flag value to a usable string.
-        '''
-        matrix = {TrackFlagCodes.d_sq_brackets: 'detected_square_brackets',
-                  TrackFlagCodes.d_parenthesis: 'detected_parenthesis',
-                  TrackFlagCodes.l_group: 'likely_group_artist',
-                  TrackFlagCodes.p_feat_artist: 'possible_featured_artist',
-                  TrackFlagCodes.p_live: 'possible_live_performance',
-                  TrackFlagCodes.p_demo: 'possible_demo_performance',
-                  TrackFlagCodes.p_blank_track: 'possible_blank_track',
-                  TrackFlagCodes.p_bonus_track: 'possible_bonus_track',
-                  TrackFlagCodes.p_genre_country_folk:
-                  'country_and_folk_genre_is_too_vague',
-                  TrackFlagCodes.m_year: 'missing_copyright_year',
-                  TrackFlagCodes.m_title: 'missing_title',
-                  TrackFlagCodes.m_album_title: 'missing_album_title',
-                  TrackFlagCodes.m_track_artist: 'missing_artist'}
-        if in_code in matrix:
-            return matrix[in_code]
         return ''
