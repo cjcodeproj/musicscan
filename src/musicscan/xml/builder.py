@@ -66,10 +66,10 @@ class AbstractCompactDiscXML():
 
     def build_title(self, in_title: str) -> str:
         '''
-        XML Title Block
+        XML Album Title Block
         '''
         output = "  <title>\n"
-        output += f"   <main>{in_title}</main>\n"
+        output += f"   <main>{sanitize_for_xml(in_title)}</main>\n"
         output += "  </title>\n"
         return output
 
@@ -255,7 +255,7 @@ class AlbumElementXML():
         timestamp = datetime.datetime.now()
         output = "<album xmlns='http://vectortron.com/xml/media/audio'>\n"
         output += f" <!-- created by id3scan ({timestamp}) -->\n"
-        output += f" <title>{in_album.title}</title>\n"
+        output += f" <title>{sanitize_for_xml(in_album.title)}</title>\n"
         output += in_album.flags.to_xml_comment()
         output += self.build_chunk_catalog(in_album)
         output += self.build_chunk_classification(in_album)
