@@ -6,6 +6,18 @@ music collection and builds a set of XML files adhering to the vtmedia schema.
 It includes a tool that will recursively scan a directory for audio files
 containing ID3 tags and uses that data as the basis for bulding XML files.
 
+
+ * [How It Works](#how-it-works)
+ * [XML Schema](#xml-schema)
+ * [Scanning Example](#scanning-example)
+     * [The Audio CD File](#the-audio-cd-file)
+     * [The Index File](#the-index-file)
+     * [The Album File](#the-album-file)
+ * [Documentation](#documentation)
+ * [Building And Installing From Source Code](#building-and-installing-from-source-code)
+ * [Package Distribution](#package-distribution)
+
+
 ## How It Works
 
 It works under the assumption that the digital library was created by importing CDs
