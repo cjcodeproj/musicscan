@@ -2,6 +2,8 @@ musicscan CHANGELOG
 ======================
 
 ## CURRENT
+ - [musicscan-52](https://github.com/cjcodeproj/musicscan/issues/52) Add new flags to RST documentation
+ - [musicscan-40](https://github.com/cjcodeproj/musicscan/issues/40) Documentation: flags option flag
  - [musicscan-53](https://github.com/cjcodeproj/musicscan/issues/53) Album title is not sanitized
  - [musicscan-51](https://github.com/cjcodeproj/musicscan/issues/51) Edit flag for Intro and Reprise
  - [musicscan-22](https://github.com/cjcodeproj/musicscan/issues/22) Flag codes should probably be distinct between album and song

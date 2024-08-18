@@ -48,7 +48,7 @@ OPTIONS
     If existing XML files are already in the output path, they will be overwritten.
 
 ``--flags``
-    If specified, additional XML comments will be embedded in the file containing
+    By default, additional XML comments will be embedded in the file containing context
     hints about the data, such as whether a song has a featured guest artist,
     or if a track is just filler material from the source CD.
 
@@ -77,8 +77,8 @@ correctly identify multiple artists, or distinguish between an individual artist
 If you don't like the results of your editing, it's possible to just delete the data
 and re-generate it by running the id3scan again.
 
-FLAGS
------
+ALBUM FLAGS
+-----------
 
 Flags are embedded information in the XML comments that provide information on
 how the software has interpreted the metadata
@@ -92,8 +92,18 @@ how the software has interpreted the metadata
 ``possible_soundtrack``
     The album is possibly a soundtrack from a film, television show, or play.
 
-``possible_score```
+``possible_score``
     The album is possible a musical score from a film, television show, or play.
+
+``possible_tribute``
+  The album is possibly a tribute to another musical artist.
+
+``possible_intro_and_reprise``
+  The first track of the album may be an introduction, and the final track may
+  be a repreise.
+
+TRACK FLAGS
+-----------
 
 ``detected_square_brackets``
     Square brackets were detected in the title of the track, suggesting extra
@@ -122,12 +132,27 @@ how the software has interpreted the metadata
 ``possible_blank_track``
     The track is possibly a blank track that contains no actual music.
 
+``possible_bonus_track``
+    It's possible the track is a bonus track, which could appear
+    on a re-issue of a CD or record.
+
 ``country_and_folk_genre_is_too_vague``
     The metadata genre value for the track is "Country & Folk", which
     actually is two different genres.  The value should be changed to
     the more accurate value.
 
+``missing_copyright_year``
+    The copyright year information could be missing.
 
+``missing_artist``
+    The artist name is missing
+
+``possible_intro_track``
+   The track could serve as an introduction to the album, or
+   to another track.
+
+``possible_reprise_track``
+    The track could serve as a reprise to the album.
 
 ENVIRONMENT VARIABLES
 ---------------------
