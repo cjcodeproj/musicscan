@@ -1,7 +1,8 @@
 musicscan CHANGELOG
 ======================
 
-## CURRENT
+## RELEASE 0.1.7
+ - [musicscan-57](https://github.com/cjcodeproj/musicscan/issues/57) Release 0.1.7
  - [musicscan-36](https://github.com/cjcodeproj/musicscan/issues/36) Update some editing notes
  - [musicscan-52](https://github.com/cjcodeproj/musicscan/issues/52) Add new flags to RST documentation
  - [musicscan-40](https://github.com/cjcodeproj/musicscan/issues/40) Documentation: flags option flag
