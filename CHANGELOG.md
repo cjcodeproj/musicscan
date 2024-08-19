@@ -1,6 +1,17 @@
 musicscan CHANGELOG
 ======================
 
+## RELEASE 0.1.7
+ - [musicscan-57](https://github.com/cjcodeproj/musicscan/issues/57) Release 0.1.7
+ - [musicscan-36](https://github.com/cjcodeproj/musicscan/issues/36) Update some editing notes
+ - [musicscan-52](https://github.com/cjcodeproj/musicscan/issues/52) Add new flags to RST documentation
+ - [musicscan-40](https://github.com/cjcodeproj/musicscan/issues/40) Documentation: flags option flag
+ - [musicscan-53](https://github.com/cjcodeproj/musicscan/issues/53) Album title is not sanitized
+ - [musicscan-51](https://github.com/cjcodeproj/musicscan/issues/51) Edit flag for Intro and Reprise
+ - [musicscan-22](https://github.com/cjcodeproj/musicscan/issues/22) Flag codes should probably be distinct between album and song
+ - [musicscan-49](https://github.com/cjcodeproj/musicscan/issues/49) id3scan should be a bin tool
+
+
 ## RELEASE 0.1.5
  - [musicscan-46](https://github.com/cjcodeproj/musicscan/issues/46) Release 0.1.5
  - [musicscan-34](https://github.com/cjcodeproj/musicscan/issues/34) Flag for bonus tracks

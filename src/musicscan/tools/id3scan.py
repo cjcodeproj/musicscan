@@ -123,7 +123,10 @@ def show_debug_data(in_data):
             print(f"Field: {field} {entry_d[field]}")
 
 
-if __name__ == '__main__':
+def setup_parser():
+    '''
+    Set up all of the command line arguments.
+    '''
     parser = argparse.ArgumentParser(description='Scan music files',
                                      epilog='Report music data and output XML')
     parser.add_argument('--musicpath', help='path of music files')
@@ -144,24 +147,33 @@ if __name__ == '__main__':
     parser.add_argument('--debug', action='store_true',
                         default=False,
                         help='write debug info in XML files')
+    return parser
 
-    args = parser.parse_args()
-    musicpath = args.musicpath
+
+def setup_musicpath(in_args):
+    '''
+    Make sure the musicpath value is
+    properly set up.
+    '''
+    musicpath = in_args.musicpath
     if not musicpath:
         if 'MUSICPATH' in os.environ:
             musicpath = os.environ['MUSICPATH']
-        else:
-            print("\nFAILURE: Can't find a source path for music files.\n")
-            parser.print_help()
-            sys.exit(2)
+    return musicpath
+
+
+def process_run(in_musicpath, in_args):
+    '''
+    Do the actual work to scan all the files.
+    '''
     stats = Stats()
     stats.process_id = os.getpid()
     print(stats.header())
-    all_files = get_files(musicpath, stats)
+    all_files = get_files(in_musicpath, stats)
     data = scan_files(all_files)
     library = Library()
     organizer = Organizer(library)
-    if args.debug:
+    if in_args.debug:
         show_debug_data(data)
     for entry in data:
         organizer.examine_track(entry)
@@ -174,14 +186,41 @@ if __name__ == '__main__':
     for alb in organizer.albums:
         alb.report()
 
-    if args.outdir:
-        report_xml_files(args, organizer)
+    if in_args.outdir:
+        report_xml_files(in_args, organizer)
 
-    if args.write and args.outdir:
-        write_xml_files(organizer, args, stats)
+    if in_args.write and in_args.outdir:
+        write_xml_files(organizer, in_args, stats)
     else:
         print("\nXML output was not specified.")
 
     stats.close()
 
     print(stats.report())
+
+
+#
+# Main Command Line Interface
+#
+
+def main_cli():
+    '''
+    Entry point for id3scan script.
+    '''
+    parser = setup_parser()
+    args = parser.parse_args()
+    musicpath = setup_musicpath(args)
+    if not musicpath:
+        print("\nFAILURE: Can't find source path for music files.\n")
+        parser.print_help()
+        sys.exit(2)
+    process_run(musicpath, args)
+
+
+#
+# Main Block
+#
+
+
+if __name__ == '__main__':
+    main_cli()

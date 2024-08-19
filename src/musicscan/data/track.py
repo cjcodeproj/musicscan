@@ -32,7 +32,7 @@ from __future__ import annotations
 from datetime import timedelta
 from typing import TYPE_CHECKING
 from tinytag import TinyTag  # type: ignore
-from musicscan.data.flags import Flags, FlagCodes
+from musicscan.data.flags import TrackFlags, TrackFlagCodes
 from musicscan.data.stringtools import sanitize_year
 
 
@@ -59,7 +59,7 @@ class Track():
         self.album_artist = ''
         self.composer = ''
         self.year = '0000'
-        self.flags = Flags()
+        self.flags = TrackFlags()
         # self.indices = []
         self._process(in_tag)
 
@@ -80,7 +80,7 @@ class Track():
         if in_tag.year:
             self.year = sanitize_year(in_tag.year)
         else:
-            self.flags.add_flag(FlagCodes.m_year)
+            self.flags.add_flag(TrackFlagCodes.m_year)
 
     def _process_integer_values(self, in_tag: TinyTag):
         '''

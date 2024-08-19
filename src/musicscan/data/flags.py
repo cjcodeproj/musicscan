@@ -32,8 +32,10 @@ more flags that will be output as an XML comment with the XML elements.
 
 # pylint: disable=R0903
 
+from musicscan.data.flagcodes import AlbumFlagCodes, TrackFlagCodes
 
-class Flags():
+
+class AlbumFlags():
     '''
     Flags are warnings that are output in the XML
     so users can identify possible issues with
@@ -41,6 +43,9 @@ class Flags():
     '''
     def __init__(self):
         self.flags = []
+
+    def __contains__(self, in_flag: AlbumFlagCodes):
+        return in_flag in self.flags
 
     def add_flag(self, in_code: int):
         '''
@@ -58,56 +63,39 @@ class Flags():
         if len(self.flags) > 0:
             flag_string = ''
             for f_code in self.flags:
-                flag_string += FlagCodes.to_str(f_code) + ' '
+                flag_string += AlbumFlagCodes.to_str(f_code) + ' '
             return f"{p_str}<!-- EDIT FLAGS: {flag_string} -->\n"
         return ''
 
 
-class FlagCodes():
+class TrackFlags():
     '''
-    All possible flag values
+    Flags are warnings that are output in the XML
+    so users can identify possible issues with
+    the interpreted data.
     '''
-    p_greatest = 1
-    p_hits_compo = 2
-    p_soundtrack = 3
-    p_score = 4
-    d_sq_brackets = 10
-    d_parenthesis = 11
-    l_group = 20
-    p_feat_artist = 30
-    p_live = 31
-    p_demo = 32
-    p_blank_track = 40
-    p_bonus_track = 41
-    p_genre_country_folk = 50
-    m_year = 60
-    m_title = 61
-    m_album_title = 62
-    m_track_artist = 63
+    def __init__(self):
+        self.flags = []
 
-    @classmethod
-    def to_str(cls, in_code: int) -> str:
+    def __contains__(self, in_flag: TrackFlagCodes):
+        return in_flag in self.flags
+
+    def add_flag(self, in_code: int):
         '''
-        Convert a flag value to a usable string.
+        Add a FlagCode to the array.
         '''
-        matrix = {FlagCodes.p_greatest: 'possible_greatest_hits',
-                  FlagCodes.p_hits_compo: 'possible_hits_compilation',
-                  FlagCodes.p_soundtrack: 'possible_soundtrack',
-                  FlagCodes.p_score: 'possible_score',
-                  FlagCodes.d_sq_brackets: 'detected_square_brackets',
-                  FlagCodes.d_parenthesis: 'detected_parenthesis',
-                  FlagCodes.l_group: 'likely_group_artist',
-                  FlagCodes.p_feat_artist: 'possible_featured_artist',
-                  FlagCodes.p_live: 'possible_live_performance',
-                  FlagCodes.p_demo: 'possible_demo_performance',
-                  FlagCodes.p_blank_track: 'possible_blank_track',
-                  FlagCodes.p_bonus_track: 'possible_bonus_track',
-                  FlagCodes.p_genre_country_folk:
-                  'country_and_folk_genre_is_too_vague',
-                  FlagCodes.m_year: 'missing_copyright_year',
-                  FlagCodes.m_title: 'missing_title',
-                  FlagCodes.m_album_title: 'missing_album_title',
-                  FlagCodes.m_track_artist: 'missing_artist'}
-        if in_code in matrix:
-            return matrix[in_code]
+        self.flags.append(in_code)
+
+    def to_xml_comment(self, in_padding: int = 3) -> str:
+        '''
+        Convert each flag code to an XML comment string value.
+        '''
+        p_str = ''
+        if in_padding > 0:
+            p_str = f"{' ' * in_padding}"
+        if len(self.flags) > 0:
+            flag_string = ''
+            for f_code in self.flags:
+                flag_string += TrackFlagCodes.to_str(f_code) + ' '
+            return f"{p_str}<!-- EDIT FLAGS: {flag_string} -->\n"
         return ''
