@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #
-# Copyright 2024 Chris Josephes
+# Copyright 2025 Chris Josephes
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -369,9 +369,11 @@ class SongElementXML():
                           "    </artists>\n"
             if in_track.composer:
                 output += "    <composers>\n" +\
-                          "     <composer><unkn>" +\
+                          "     <composer>\n" +\
+                          "      <name><unkn>" +\
                           f"{sanitize_for_xml(in_track.composer)}" +\
-                          "</unkn></composer>\n" +\
+                          "</unkn></name>\n" +\
+                          "     </composer>\n" +\
                           "    </composers>\n"
             output += "   </catalog>\n"
         return output

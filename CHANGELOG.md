@@ -2,6 +2,7 @@ musicscan CHANGELOG
 ======================
 
 ## CURRENT
+ - [musicscan-64](https://github.com/cjcodeproj/musicscan/issues/64) Fix composer tag structure
  - [musicscan-11](https://github.com/cjcodeproj/musicscan/issues/11) Cleaner debug output
 
 ## RELEASE 0.1.7
