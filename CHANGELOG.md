@@ -1,6 +1,9 @@
 musicscan CHANGELOG
 ======================
 
+## CURRENT
+ - [musicscan-11](https://github.com/cjcodeproj/musicscan/issues/11) Cleaner debug output
+
 ## RELEASE 0.1.7
  - [musicscan-57](https://github.com/cjcodeproj/musicscan/issues/57) Release 0.1.7
  - [musicscan-36](https://github.com/cjcodeproj/musicscan/issues/36) Update some editing notes
