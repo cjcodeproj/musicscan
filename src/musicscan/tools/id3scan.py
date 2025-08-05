@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #
-# Copyright 2024 Chris Josephes
+# Copyright 2025 Chris Josephes
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -60,13 +60,14 @@ def get_files(in_path, in_stats):
     return file_list
 
 
-def scan_files(in_files):
+def scan_files(in_files, in_args):
     '''
     Generate a TinyTag object from each file identified.
     '''
     tag_objects = []
     for file in in_files:
-        print(f"Source file : {file}")
+        if in_args.debug:
+            print(f"Source file : {file}")
         tagdata = TinyTag.get(file)
         tag_objects.append(tagdata)
     return tag_objects
@@ -170,7 +171,7 @@ def process_run(in_musicpath, in_args):
     stats.process_id = os.getpid()
     print(stats.header())
     all_files = get_files(in_musicpath, stats)
-    data = scan_files(all_files)
+    data = scan_files(all_files, in_args)
     library = Library()
     organizer = Organizer(library)
     if in_args.debug:

@@ -1,7 +1,7 @@
 #!/usr/bin/env/python
 
 #
-# Copyright 2024 Chris Josephes
+# Copyright 2025 Chris Josephes
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -70,7 +70,7 @@ def sanitize_year(in_year: str) -> str:
     return 'UNKN'
 
 
-def sanitize_for_xml(in_string: str) -> str:
+def sanitize_for_xml(in_string: str | None) -> str | None:
     '''
     Fix a string so it is suitable to go into
     XML output.

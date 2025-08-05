@@ -1,6 +1,12 @@
 musicscan CHANGELOG
 ======================
 
+## RELEASE 0.1.9
+ - [musicscan-68](https://github.com/cjcodeproj/musicscan/issues/68) Release 0.1.9
+ - [musicscan-69](https://github.com/cjcodeproj/musicscan/issues/69) Typing issues
+ - [musicscan-64](https://github.com/cjcodeproj/musicscan/issues/64) Fix composer tag structure
+ - [musicscan-11](https://github.com/cjcodeproj/musicscan/issues/11) Cleaner debug output
+
 ## RELEASE 0.1.7
  - [musicscan-57](https://github.com/cjcodeproj/musicscan/issues/57) Release 0.1.7
  - [musicscan-36](https://github.com/cjcodeproj/musicscan/issues/36) Update some editing notes
