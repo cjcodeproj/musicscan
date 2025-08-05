@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #
-# Copyright 2024 Chris Josephes
+# Copyright 2025 Chris Josephes
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,7 @@ Data objects for music.
 from tinytag import TinyTag  # type: ignore
 import musicscan.data.artist
 import musicscan.data.analyzer
-from musicscan.data.artist import AbstractAlbumArtist
+from musicscan.data.artist import (AlbumArtist, AlbumVariousArtists)
 from musicscan.data.cd import Album
 from musicscan.generic.stats import Stats
 
@@ -67,7 +67,7 @@ class Organizer():
         self.track_count = 0
         self.library = in_library
         self.albums: list[Album] = []
-        self.artists: dict[AbstractAlbumArtist, TinyTag] = {}
+        self.artists: dict[str, dict[str, list[TinyTag]]] = {}
 
     def examine_track(self, in_tag: TinyTag):
         '''
@@ -77,17 +77,20 @@ class Organizer():
         '''
         artist = in_tag.albumartist or in_tag.artist
         album = in_tag.album
-        if artist not in self.artists:
-            self.artists[artist] = {}
-            self.artists[artist][album] = [in_tag]
-            self.track_count += 1
-        else:
-            if album not in self.artists[artist]:
-                self.artists[artist][album] = [in_tag]
-                self.track_count += 1
+        if artist is not None:
+            if artist not in self.artists:
+                self.artists[artist] = {}
+                if album is not None:
+                    self.artists[artist][album] = [in_tag]
+                    self.track_count += 1
             else:
-                self.artists[artist][album].append(in_tag)
-                self.track_count += 1
+                if album is not None:
+                    if album not in self.artists[artist]:
+                        self.artists[artist][album] = [in_tag]
+                        self.track_count += 1
+                    else:
+                        self.artists[artist][album].append(in_tag)
+                        self.track_count += 1
 
     def build_albums(self):
         '''
@@ -95,10 +98,11 @@ class Organizer():
         tag data.
         '''
         for art in self.artists:
+            art_o: AlbumVariousArtists | AlbumArtist
             if art == 'Various Artists':
-                art_o = musicscan.data.artist.AlbumVariousArtists()
+                art_o = AlbumVariousArtists()
             else:
-                art_o = musicscan.data.artist.AlbumArtist(art)
+                art_o = AlbumArtist(art)
             for album in self.artists[art]:
                 album_o = Album(art_o, album)
                 for tag in self.artists[art][album]:

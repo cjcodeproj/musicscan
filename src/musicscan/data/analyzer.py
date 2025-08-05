@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #
-# Copyright 2024 Chris Josephes
+# Copyright 2025 Chris Josephes
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -158,10 +158,12 @@ class Analyzer():
         Test the track title to indicate metadata may
         have been embeded in the track name in parenthesis.
         '''
-        if '[' in in_track.title or ']' in in_track.title:
-            in_track.flags.add_flag(TrackFlagCodes.d_sq_brackets)
-        if '(' in in_track.title or ')' in in_track.title:
-            in_track.flags.add_flag(TrackFlagCodes.d_parenthesis)
+        if in_track.title is not None:
+            if '[' in in_track.title or ']' in in_track.title:
+                in_track.flags.add_flag(TrackFlagCodes.d_sq_brackets)
+        if in_track.title is not None:
+            if '(' in in_track.title or ')' in in_track.title:
+                in_track.flags.add_flag(TrackFlagCodes.d_parenthesis)
 
     def test_album_track_featured(self, in_track: Track):
         '''
@@ -170,10 +172,14 @@ class Analyzer():
         '''
         feature_p = re.compile(r'Feat', re.IGNORECASE)
         with_p = re.compile(r'With\s+', re.IGNORECASE)
-        if feature_p.search(in_track.title) or with_p.search(in_track.title):
-            in_track.flags.add_flag(TrackFlagCodes.p_feat_artist)
-        if feature_p.search(in_track.artist) or with_p.search(in_track.artist):
-            in_track.flags.add_flag(TrackFlagCodes.p_feat_artist)
+        if in_track.title is not None:
+            if (feature_p.search(in_track.title) or
+                    with_p.search(in_track.title)):
+                in_track.flags.add_flag(TrackFlagCodes.p_feat_artist)
+        if in_track.artist is not None:
+            if (feature_p.search(in_track.artist) or
+                    with_p.search(in_track.artist)):
+                in_track.flags.add_flag(TrackFlagCodes.p_feat_artist)
 
     def test_album_track_live(self, in_track: Track):
         '''
@@ -181,8 +187,9 @@ class Analyzer():
         indicate a live recording.
         '''
         live_p = re.compile(r'Live\s+', re.IGNORECASE)
-        if live_p.search(in_track.title):
-            in_track.flags.add_flag(TrackFlagCodes.p_live)
+        if in_track.title is not None:
+            if live_p.search(in_track.title):
+                in_track.flags.add_flag(TrackFlagCodes.p_live)
 
     def test_track_genre(self, in_track: Track):
         '''
@@ -199,8 +206,9 @@ class Analyzer():
         be a demo recording.
         '''
         demo_p = re.compile(r'Demo', re.IGNORECASE)
-        if demo_p.search(in_track.title):
-            in_track.flags.add_flag(TrackFlagCodes.p_demo)
+        if in_track.title is not None:
+            if demo_p.search(in_track.title):
+                in_track.flags.add_flag(TrackFlagCodes.p_demo)
 
     def test_album_track_blank(self, in_track: Track):
         '''
@@ -208,8 +216,9 @@ class Analyzer():
         be a blank track to pad the CD content.
         '''
         blank_p = re.compile(r'Blank', re.IGNORECASE)
-        if blank_p.search(in_track.title):
-            in_track.flags.add_flag(TrackFlagCodes.p_blank_track)
+        if in_track.title is not None:
+            if blank_p.search(in_track.title):
+                in_track.flags.add_flag(TrackFlagCodes.p_blank_track)
 
     def test_album_track_bonus(self, in_track: Track):
         '''
@@ -218,8 +227,9 @@ class Analyzer():
         (which could also indicate a re-issue)
         '''
         bonus_p = re.compile(r'\W+Bonus', re.IGNORECASE)
-        if bonus_p.search(in_track.title):
-            in_track.flags.add_flag(TrackFlagCodes.p_bonus_track)
+        if in_track.title is not None:
+            if bonus_p.search(in_track.title):
+                in_track.flags.add_flag(TrackFlagCodes.p_bonus_track)
 
     def test_album_track_intro(self, in_track: Track):
         '''
@@ -227,8 +237,9 @@ class Analyzer():
         another track, or possibly for the album itself.
         '''
         intro_p = re.compile(r'[\s\W]?Intro', re.IGNORECASE)
-        if intro_p.search(in_track.title):
-            in_track.flags.add_flag(TrackFlagCodes.p_intro)
+        if in_track.title is not None:
+            if intro_p.search(in_track.title):
+                in_track.flags.add_flag(TrackFlagCodes.p_intro)
 
     def test_album_track_reprise(self, in_track: Track):
         '''
@@ -237,8 +248,9 @@ class Analyzer():
         track on the album.
         '''
         reprise_p = re.compile(r'[\s\W]?Reprise', re.IGNORECASE)
-        if reprise_p.search(in_track.title):
-            in_track.flags.add_flag(TrackFlagCodes.p_reprise)
+        if in_track.title is not None:
+            if reprise_p.search(in_track.title):
+                in_track.flags.add_flag(TrackFlagCodes.p_reprise)
 
     def test_intro_reprise_presence(self, in_album: Album):
         '''
