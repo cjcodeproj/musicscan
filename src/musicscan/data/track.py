@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #
-# Copyright 2024 Chris Josephes
+# Copyright 2025 Chris Josephes
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -46,9 +46,9 @@ class Track():
     created through ID3 data.
     '''
     def __init__(self, in_tag: TinyTag):
-        self.title = ''
-        self.artist = ''
-        self.album = ''
+        self.title: str | None = ''
+        self.artist: str | None = ''
+        self.album: str | None = ''
         self.album_o: Album | None = None
         self.track_no = 0
         self.track_total = 0
@@ -60,6 +60,8 @@ class Track():
         self.composer = ''
         self.year = '0000'
         self.flags = TrackFlags()
+        self.duration_t: timedelta | None = None
+        self.duration_s: str = ''
         # self.indices = []
         self._process(in_tag)
 
@@ -73,14 +75,21 @@ class Track():
             self.album_artist = in_tag.albumartist
         if in_tag.composer:
             self.composer = in_tag.composer
-        self.duration_r = in_tag.duration
-        self.duration_f = self.duration_r * 100 / int(100)
-        self.duration_t = timedelta(seconds=float(self.duration_f))
-        self.duration_s = Track._make_iso_interval(self.duration_t)
+        self._process_duration(in_tag)
         if in_tag.year:
             self.year = sanitize_year(in_tag.year)
         else:
             self.flags.add_flag(TrackFlagCodes.m_year)
+
+    def _process_duration(self, in_tag: TinyTag):
+        '''
+        Reduce the duration value to 2 decimals of a second.
+        '''
+        duration: float | None = in_tag.duration
+        if duration is not None:
+            limited_duration: float = duration * 100 / int(100)
+            self.duration_t = timedelta(seconds=float(limited_duration))
+            self.duration_s = Track._make_iso_interval(self.duration_t)
 
     def _process_integer_values(self, in_tag: TinyTag):
         '''
@@ -114,7 +123,7 @@ class Track():
         seconds = float(fld[2])
         return f"PT{minutes}M{seconds:.2f}S"
 
-    def get_album_artist(self) -> str:
+    def get_album_artist(self) -> str | None:
         '''
         Return an artist value, whether it exists or not.
         '''
