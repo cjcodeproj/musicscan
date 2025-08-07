@@ -70,7 +70,7 @@ def sanitize_year(in_year: str) -> str:
     return 'UNKN'
 
 
-def sanitize_for_xml(in_string: str | None) -> str | None:
+def sanitize_for_xml(in_string: str) -> str:
     '''
     Fix a string so it is suitable to go into
     XML output.

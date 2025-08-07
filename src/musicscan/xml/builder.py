@@ -342,6 +342,8 @@ class SongElementXML():
         if self.debug:
             output += f"  <!-- POSITION: Disc {in_track.disc_no} " +\
                       f"Track: {in_track.track_no} -->\n"
+        if in_track.title is None:
+            in_track.title = ''
         output += "   <title>\n"
         output += f"    <main>{sanitize_for_xml(in_track.title)}</main>\n"
         output += "   </title>\n"
@@ -361,6 +363,8 @@ class SongElementXML():
             art_str = str(in_track.album_o.artist)
         if in_track.artist != art_str or in_track.composer:
             output = "   <catalog>\n"
+            if in_track.artist is None:
+                in_track.artist = ''
             if in_track.artist != art_str:
                 output += "    <artists>\n" +\
                           "     <artist><unkn>" +\
