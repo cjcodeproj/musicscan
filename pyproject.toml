@@ -1,9 +1,9 @@
 [project]
 name = "musicscan"
-version = "0.1.9"
+version = "0.2.1"
 description = "Package for converting music metadata to XML"
 readme = "README.md"
-requires-python = ">3.8"
+requires-python = ">=3.9"
 dependencies = [
   "tinytag"
 ]
