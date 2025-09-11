@@ -1,12 +1,12 @@
 [project]
 name = "musicscan"
-version = "0.2.1"
 description = "Package for converting music metadata to XML"
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
   "tinytag"
 ]
+dynamic = ["version"]
 
 license = "MIT"
 license-files = ["LICENSE"]
@@ -44,5 +44,8 @@ requires = [
 ]
 build-backend = "setuptools.build_meta"
 
-[tools.pylint.messages_control]
+[tool.pylint.messages_control]
 disable = ["R0801"]
+
+[tool.setuptools.dynamic]
+version = {attr = "musicscan.__version__"}

@@ -38,11 +38,15 @@ import os
 import os.path
 import sys
 from tinytag import TinyTag  # type: ignore
+import musicscan
 from musicscan.fileops.scanner import Walker
 from musicscan.fileops.filenames import FilenameMatches
 from musicscan.fileops.xmlwriter import XMLFileWriter
 from musicscan.generic.stats import Stats
 from musicscan.data.library import Library, Organizer
+
+
+__version__ = musicscan.__version__
 
 
 def get_files(in_path, in_stats):

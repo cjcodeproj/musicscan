@@ -1,6 +1,9 @@
 musicscan CHANGELOG
 ======================
 
+## CURRENT
+ - [musicscan-83](https://github.com/cjcodeproj/musicscan/issues/83) Put version identifier into the code
+
 ## RELEASE 0.2.1
  - [musicscan-75](https://github.com/cjcodeproj/musicscan/issues/75) Release 0.2.1
  - [musicscan-73](https://github.com/cjcodeproj/musicscan/issues/73) OSX 15.6 (Python 3.9)

@@ -28,12 +28,15 @@ XML Output blocks
 '''
 
 import datetime
+import musicscan
 from musicscan.data.cd import Album
 from musicscan.data.track import Track
 from musicscan.data.stringtools import sanitize_for_xml
 
 
 XML_DECLARATION = "<?xml version='1.0'?>\n"
+
+VERS_STR = musicscan.__version__
 
 
 class AbstractCompactDiscXML():
@@ -52,7 +55,7 @@ class AbstractCompactDiscXML():
         output = XML_DECLARATION
         output += "<medialist xmlns='http://vectortron.com/xml/media/media'"
         output += " xmlns:xi='http://www.w3.org/2001/XInclude'>\n"
-        output += f" <!-- created by id3scan ({timestamp}) -->\n"
+        output += f" <!-- created by id3scan v{VERS_STR} ({timestamp}) -->\n"
         output += " <media>\n"
         return output
 
@@ -184,7 +187,7 @@ class Index():
             ns_str = " xmlns='http://vectortron.com/xml/media/media'"
             output = XML_DECLARATION
         output += f"<cdIndex ref='cd{in_cd.disc_no:02}'{ns_str}>\n"
-        output += f" <!-- created by id3scan ({timestamp}) -->\n"
+        output += f" <!-- created by id3scan v{VERS_STR} ({timestamp}) -->\n"
         for trk in sorted(in_cd.tracks, key=lambda x: x.track_no):
             output += self.add_track_xml(trk)
         output += "</cdIndex>\n"
@@ -254,7 +257,7 @@ class AlbumElementXML():
         '''
         timestamp = datetime.datetime.now()
         output = "<album xmlns='http://vectortron.com/xml/media/audio'>\n"
-        output += f" <!-- created by id3scan ({timestamp}) -->\n"
+        output += f" <!-- created by id3scan v{VERS_STR} ({timestamp}) -->\n"
         output += f" <title>{sanitize_for_xml(in_album.title)}</title>\n"
         output += in_album.flags.to_xml_comment()
         output += self.build_chunk_catalog(in_album)
