@@ -81,9 +81,7 @@ class AbstractCompactDiscXML():
         The main elements reporting on the physical media.
         '''
         output = "  <medium>\n"
-        output += "   <release>\n"
-        output += "    <type><audiocd/></type>\n"
-        output += "   </release>\n"
+        output += "   <audiocd/>\n"
         output += "   <productSpecs>\n"
         output += "    <inventory>\n"
         output += "     <case>\n"
