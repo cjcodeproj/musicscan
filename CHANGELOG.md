@@ -2,6 +2,7 @@ musicscan CHANGELOG
 ======================
 
 ## CURRENT
+ - [musicscan-67](https://github.com/cjcodeproj/musicscan/issues/67) Create a name reference comment for editing
  - [musicscan-85](https://github.com/cjcodeproj/musicscan/issues/85) Use the new element structure for medium
  - [musicscan-83](https://github.com/cjcodeproj/musicscan/issues/83) Put version identifier into the code
 

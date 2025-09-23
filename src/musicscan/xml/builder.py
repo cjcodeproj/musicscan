@@ -368,6 +368,9 @@ class SongElementXML():
                 in_track.artist = ''
             if in_track.artist != art_str:
                 output += "    <artists>\n" +\
+                          "     <!-- ORIGVAL: " +\
+                          f"{sanitize_for_xml(in_track.artist)}" +\
+                          " -->\n" +\
                           "     <artist><unkn>" +\
                           f"{sanitize_for_xml(in_track.artist)}" +\
                           "</unkn></artist>\n" +\
@@ -375,6 +378,9 @@ class SongElementXML():
             if in_track.composer:
                 output += "    <composers>\n" +\
                           "     <composer>\n" +\
+                          "      <!-- ORIGVAL: " +\
+                          f"{sanitize_for_xml(in_track.composer)}" +\
+                          " -->\n" +\
                           "      <name><unkn>" +\
                           f"{sanitize_for_xml(in_track.composer)}" +\
                           "</unkn></name>\n" +\
