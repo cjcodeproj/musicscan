@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #
-# Copyright 2024 Chris Josephes
+# Copyright 2025 Chris Josephes
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -51,7 +51,8 @@ class AlbumFlags():
         '''
         Add a FlagCode to the array.
         '''
-        self.flags.append(in_code)
+        if in_code not in self.flags:
+            self.flags.append(in_code)
 
     def to_xml_comment(self, in_padding: int = 3) -> str:
         '''
@@ -84,7 +85,8 @@ class TrackFlags():
         '''
         Add a FlagCode to the array.
         '''
-        self.flags.append(in_code)
+        if in_code not in self.flags:
+            self.flags.append(in_code)
 
     def to_xml_comment(self, in_padding: int = 3) -> str:
         '''

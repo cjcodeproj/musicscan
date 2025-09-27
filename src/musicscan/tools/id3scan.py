@@ -38,11 +38,15 @@ import os
 import os.path
 import sys
 from tinytag import TinyTag  # type: ignore
+import musicscan
 from musicscan.fileops.scanner import Walker
 from musicscan.fileops.filenames import FilenameMatches
 from musicscan.fileops.xmlwriter import XMLFileWriter
 from musicscan.generic.stats import Stats
 from musicscan.data.library import Library, Organizer
+
+
+__version__ = musicscan.__version__
 
 
 def get_files(in_path, in_stats):
@@ -108,6 +112,7 @@ def write_xml_files(in_organizer, in_args, in_stats):
     writer.set_debug(in_args.debug)
     writer.set_overwrite(in_args.overwrite)
     writer.set_split_xml(in_args.splitxml)
+    writer.set_manifest(in_args.manifest)
     for alb_i in in_organizer.albums:
         writer.write_xml(alb_i)
     in_stats.files_written = writer.files_written
@@ -148,6 +153,9 @@ def setup_parser():
     parser.add_argument('--debug', action='store_true',
                         default=False,
                         help='write debug info in XML files')
+    parser.add_argument('--manifest', action='store_true',
+                        default=False,
+                        help='output manifest of new files')
     return parser
 
 
