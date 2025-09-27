@@ -1,7 +1,7 @@
 musicscan CHANGELOG
 ======================
 
-## CURRENT
+## RELEASE 0.2.3
  - [musicscan-60](https://github.com/cjcodeproj/musicscan/issues/60) Add output file of all new files written
  - [musicscan-61](https://github.com/cjcodeproj/musicscan/issues/61) Repeated flags
  - [musicscan-67](https://github.com/cjcodeproj/musicscan/issues/67) Create a name reference comment for editing

@@ -11,7 +11,7 @@ dynamic = ["version"]
 license = "MIT"
 license-files = ["LICENSE"]
 
-keywords = ["xml", "music", "cds", "id3"]
+keywords = ["xml", "music", "cds", "metadata", "id3", "mp3", "m4a", "wav"]
 authors = [
   {email = "cjcodeproj@fastmail.com", name = "Chris J"}
 ]
@@ -21,6 +21,7 @@ classifiers = [
   "Intended Audience :: Developers",
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
   "Topic :: Text Processing :: Markup :: XML",
   "Topic :: Multimedia",
   "Topic :: Multimedia :: Sound/Audio",
