@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #
-# Copyright 2024 Chris Josephes
+# Copyright 2025 Chris Josephes
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -26,6 +26,7 @@
 Write out XML data for an album.
 '''
 
+import datetime
 import os.path
 from musicscan.xml.builder import (CompleteCompactDiscXML,
                                    SplitCompactDiscXML, Index, AlbumElementXML)
@@ -42,7 +43,9 @@ class XMLFileWriter():
         self._debug = False
         self._overwrite = False
         self._split_xml = False
+        self._manifest = False
         self.files_written = 0
+        self.files_out = []
 
     def debug(self):
         '''
@@ -80,6 +83,18 @@ class XMLFileWriter():
         '''
         self._split_xml = in_split_xml
 
+    def manifest(self):
+        '''
+        Return the manifest value.
+        '''
+        return self._manifest
+
+    def set_manifest(self, in_manifest):
+        '''
+        Set the manifest value.
+        '''
+        self._manifest = in_manifest
+
     def identify_files(self, in_album, in_type='audiocd'):
         '''
         Identify all possible files from an passed album.
@@ -102,18 +117,22 @@ class XMLFileWriter():
             self.write_split_xml(in_album)
         else:
             self.write_single_xml(in_album)
+        if self._manifest and len(self.files_out) > 0:
+            self.write_manifest_file()
 
     def write_single_xml(self, in_album):
         '''
         Write all the XML data in a single file.
         '''
-        complete = self._path + '/' + in_album.filename('audiocd')
+        f_name = in_album.filename('audiocd')
+        complete = self._path + '/' + f_name
         audiocd = CompleteCompactDiscXML(self._debug)
         if not os.path.isfile(complete) or self._overwrite:
             with open(complete, mode='w', encoding='utf-8') as f_handle:
                 f_handle.write(audiocd.build(in_album))
                 f_handle.close()
                 self.files_written += 1
+                self.files_out.append(f_name)
 
     def write_split_xml(self, in_album):
         '''
@@ -127,13 +146,15 @@ class XMLFileWriter():
         '''
         Write the XML data pertaining to the audio CD.
         '''
-        complete = self._path + '/' + in_album.filename('audiocd')
+        f_name = in_album.filename('audiocd')
+        complete = self._path + '/' + f_name
         audiocd = SplitCompactDiscXML(self._debug)
         if not os.path.isfile(complete) or self._overwrite:
             with open(complete, mode='w', encoding='utf-8') as f_handle:
                 f_handle.write(audiocd.build(in_album))
                 f_handle.close()
                 self.files_written += 1
+                self.files_out.append(f_name)
 
     def write_split_xml_index(self, in_album):
         '''
@@ -143,21 +164,39 @@ class XMLFileWriter():
         for dsc in sorted(in_album.discs):
             dsc_o = in_album.discs[dsc]
             f_str = f"cd{dsc_o.disc_no:02}-index"
-            complete = self._path + '/' + in_album.filename(f_str)
+            f_name = in_album.filename(f_str)
+            complete = self._path + '/' + f_name
             if not os.path.isfile(complete) or self._overwrite:
                 with open(complete, mode='w', encoding='utf-8') as f_handle:
                     f_handle.write(index.build_index_per_cd(dsc_o, True))
                     f_handle.close()
                     self.files_written += 1
+                    self.files_out.append(f_name)
 
     def write_split_xml_album(self, in_album):
         '''
         Write out the XML data pertaining to the album contents.
         '''
-        complete = self._path + '/' + in_album.filename('album')
+        f_name = in_album.filename('album')
+        complete = self._path + '/' + f_name
         album = AlbumElementXML(self._debug)
         if not os.path.isfile(complete) or self._overwrite:
             with open(complete, mode='w', encoding='utf-8') as f_handle:
                 f_handle.write(album.build_standalone_album(in_album))
                 f_handle.close()
                 self.files_written += 1
+                self.files_out.append(f_name)
+
+    def write_manifest_file(self):
+        '''
+        Create a file listing all files that have been output.
+        '''
+        t_stamp = datetime.datetime.now()
+        f_name = 'FILES_WRITTEN-'
+        f_name += t_stamp.strftime("%Y%m%dT%H%M%S")
+        f_name += '.txt'
+        complete = self._path + '/' + f_name
+        with open(complete, mode='w', encoding='utf-8') as f_handle:
+            for xml_file in self.files_out:
+                f_handle.write(xml_file)
+            f_handle.close()

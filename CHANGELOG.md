@@ -2,6 +2,7 @@ musicscan CHANGELOG
 ======================
 
 ## CURRENT
+ - [musicscan-60](https://github.com/cjcodeproj/musicscan/issues/60) Add output file of all new files written
  - [musicscan-61](https://github.com/cjcodeproj/musicscan/issues/61) Repeated flags
  - [musicscan-67](https://github.com/cjcodeproj/musicscan/issues/67) Create a name reference comment for editing
  - [musicscan-85](https://github.com/cjcodeproj/musicscan/issues/85) Use the new element structure for medium
