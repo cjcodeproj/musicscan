@@ -154,7 +154,7 @@ def setup_parser():
                         default=False,
                         help='write debug info in XML files')
     parser.add_argument('--manifest', action='store_true',
-                        manifest=True,
+                        default=False,
                         help='output manifest of new files')
     return parser
 

@@ -198,5 +198,5 @@ class XMLFileWriter():
         complete = self._path + '/' + f_name
         with open(complete, mode='w', encoding='utf-8') as f_handle:
             for xml_file in self.files_out:
-                f_handle.write(xml_file)
+                f_handle.write(xml_file+'\n')
             f_handle.close()
