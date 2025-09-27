@@ -1,17 +1,17 @@
 [project]
 name = "musicscan"
-version = "0.2.1"
 description = "Package for converting music metadata to XML"
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
   "tinytag"
 ]
+dynamic = ["version"]
 
 license = "MIT"
 license-files = ["LICENSE"]
 
-keywords = ["xml", "music", "cds", "id3"]
+keywords = ["xml", "music", "cds", "metadata", "id3", "mp3", "m4a", "wav"]
 authors = [
   {email = "cjcodeproj@fastmail.com", name = "Chris J"}
 ]
@@ -21,6 +21,7 @@ classifiers = [
   "Intended Audience :: Developers",
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
   "Topic :: Text Processing :: Markup :: XML",
   "Topic :: Multimedia",
   "Topic :: Multimedia :: Sound/Audio",
@@ -44,5 +45,8 @@ requires = [
 ]
 build-backend = "setuptools.build_meta"
 
-[tools.pylint.messages_control]
+[tool.pylint.messages_control]
 disable = ["R0801"]
+
+[tool.setuptools.dynamic]
+version = {attr = "musicscan.__version__"}
