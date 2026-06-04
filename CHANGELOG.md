@@ -1,6 +1,10 @@
 musicscan CHANGELOG
 ======================
 
+## CURRENT
+
+ - [musicscan-94](https://github.com/cjcodeproj/musicscan/issues/94) Move the egg info
+
 ## RELEASE 0.2.3
  - [musicscan-60](https://github.com/cjcodeproj/musicscan/issues/60) Add output file of all new files written
  - [musicscan-61](https://github.com/cjcodeproj/musicscan/issues/61) Repeated flags

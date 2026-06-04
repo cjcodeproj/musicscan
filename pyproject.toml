@@ -45,6 +45,9 @@ requires = [
 ]
 build-backend = "setuptools.build_meta"
 
+[tool.distutils.egg_info]
+egg_base = "egg_info"
+
 [tool.pylint.messages_control]
 disable = ["R0801"]
 
