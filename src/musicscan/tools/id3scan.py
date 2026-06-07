@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #
-# Copyright 2025 Chris Josephes
+# Copyright 2026 Chris Josephes
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -116,6 +116,7 @@ def write_xml_files(in_organizer, in_args, in_stats):
     for alb_i in in_organizer.albums:
         writer.write_xml(alb_i)
     in_stats.files_written = writer.files_written
+    in_stats.manifest_file = writer.manifest_file
 
 
 def show_debug_data(in_data):
