@@ -384,6 +384,7 @@ class SongElementXML():
         output += in_track.flags.to_xml_comment()
         output += self.build_catalog(in_track)
         output += self.build_technical(in_track)
+        output += self.build_lyrics(in_track)
         output += "  </song>\n"
         return output
 
@@ -436,4 +437,21 @@ class SongElementXML():
             output += f"     <bpm>{in_track.bpm}</bpm>\n"
             output += "   </tempo>\n"
         output += "   </technical>\n"
+        return output
+
+    def build_lyrics(self, in_track: Track) -> str:
+        '''
+        Output the track lyric data (if it exist)
+        '''
+        output = ''
+        if in_track.lyrics:
+            output += "   <composition>\n"
+            output += "    <rawLyrics>\n"
+            for outline in in_track.lyrics:
+                if len(outline) > 0:
+                    output += f"     <line>{outline}</line>\n"
+                else:
+                    output += "     <line/>\n"
+            output += "    </rawLyrics>\n"
+            output += "   </composition>\n"
         return output

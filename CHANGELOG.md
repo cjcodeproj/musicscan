@@ -3,6 +3,7 @@ musicscan CHANGELOG
 
 ## CURRENT
 
+ - [musicscan-42](https://github.com/cjcodeproj/musicscan/issues/42) Lyric dump as XML element
  - [musicscan-91](https://github.com/cjcodeproj/musicscan/issues/91) id3scan output should list manifest file
  - [musicscan-92](https://github.com/cjcodeproj/musicscan/issues/92) Create empty library block
  - [musicscan-93](https://github.com/cjcodeproj/musicscan/issues/93) Create empty productID block
