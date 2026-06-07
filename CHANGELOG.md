@@ -3,6 +3,8 @@ musicscan CHANGELOG
 
 ## CURRENT
 
+ - [musicscan-92](https://github.com/cjcodeproj/musicscan/issues/92) Create empty library block
+ - [musicscan-93](https://github.com/cjcodeproj/musicscan/issues/93) Create empty productID block
  - [musicscan-94](https://github.com/cjcodeproj/musicscan/issues/94) Move the egg info
 
 ## RELEASE 0.2.3

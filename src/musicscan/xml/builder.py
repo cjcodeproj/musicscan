@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #
-# Copyright 2025 Chris Josephes
+# Copyright 2026 Chris Josephes
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -76,12 +76,43 @@ class AbstractCompactDiscXML():
         output += "  </title>\n"
         return output
 
+    def build_library(self) -> str:
+        '''
+        Build a commented out library block.
+        '''
+        output = "  <!--\n"
+        output += "  <library>\n"
+        output += "   <instances>\n"
+        output += "    <instance>\n"
+        output += "     <acquisition>\n"
+        output += "      <date><exact>0000-00-00</exact></date>\n"
+        output += "      <purchase>\n"
+        output += "       <retailer>Store</retailer>\n"
+        output += "       <price>0.99</price>\n"
+        output += "      </purchase>\n"
+        output += "      <quality><new/></quality>\n"
+        output += "     </acquisition>\n"
+        output += "     <condition>\n"
+        output += "      <status><fine/></status>\n"
+        output += "     </condition>\n"
+        output += "    </instance>\n"
+        output += "   </instances>\n"
+        output += "  </library>\n"
+        output += "   -->\n"
+        return output
+
     def build_medium(self, in_album: Album) -> str:
         '''
         The main elements reporting on the physical media.
         '''
         output = "  <medium>\n"
         output += "   <audiocd/>\n"
+        output += "   <!--\n"
+        output += "   <productId>\n"
+        output += "    <barcode type='upc'>123456789</barcode>\n"
+        output += "    <sku retailer='store'>ABCDEF</sku>\n"
+        output += "   </productId>\n"
+        output += "    -->\n"
         output += "   <productSpecs>\n"
         output += "    <inventory>\n"
         output += "     <case>\n"
@@ -104,6 +135,7 @@ class CompleteCompactDiscXML(AbstractCompactDiscXML):
         '''
         output = self.build_head()
         output += self.build_title(in_album.title)
+        output += self.build_library()
         output += self.build_medium(in_album)
         index = Index()
         output += index.build_single_chunk_from_album(in_album)
@@ -125,6 +157,7 @@ class SplitCompactDiscXML(AbstractCompactDiscXML):
         '''
         output = self.build_head()
         output += self.build_title(in_album.title)
+        output += self.build_library()
         output += self.build_medium(in_album)
         index = Index()
         output += index.build_xi_chunk_from_album(in_album)
