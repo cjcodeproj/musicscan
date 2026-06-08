@@ -49,6 +49,7 @@ class XMLFileWriter():
         self._manifest = False
         self.manifest_file = ''
         self.files_written = 0
+        self.albums_written = 0
         self.files_out = []
 
     def debug(self):
@@ -121,8 +122,6 @@ class XMLFileWriter():
             self.write_split_xml(in_album)
         else:
             self.write_single_xml(in_album)
-        if self._manifest and len(self.files_out) > 0:
-            self.write_manifest_file()
 
     def write_single_xml(self, in_album):
         '''
@@ -136,6 +135,7 @@ class XMLFileWriter():
                 f_handle.write(audiocd.build(in_album))
                 f_handle.close()
                 self.files_written += 1
+                self.albums_written += 1
                 self.files_out.append(f_name)
 
     def write_split_xml(self, in_album):
@@ -158,6 +158,7 @@ class XMLFileWriter():
                 f_handle.write(audiocd.build(in_album))
                 f_handle.close()
                 self.files_written += 1
+                self.albums_written += 1
                 self.files_out.append(f_name)
 
     def write_split_xml_index(self, in_album):

@@ -45,6 +45,7 @@ class Stats():
         self.album_count = 0
         self.track_count = 0
         self.files_written = 0
+        self.albums_written = 0
         self.manifest_file = ''
         self.process_id = 0
 
@@ -83,6 +84,7 @@ class Stats():
         out += f"{'Total Tracks':20s}: {self.track_count}\n"
         out += "\nOutput Files\n============\n"
         out += f"{'Files Written':20s}: {self.files_written}\n"
+        out += f"{'Albums Written':20s}: {self.albums_written}\n"
         if self.manifest_file:
             out += f"{'Manifest File':20s}: {self.manifest_file}\n"
         out += "\nTimes\n=====\n"
