@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #
-# Copyright 2025 Chris Josephes
+# Copyright 2026 Chris Josephes
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -113,9 +113,19 @@ def write_xml_files(in_organizer, in_args, in_stats):
     writer.set_overwrite(in_args.overwrite)
     writer.set_split_xml(in_args.splitxml)
     writer.set_manifest(in_args.manifest)
-    for alb_i in in_organizer.albums:
-        writer.write_xml(alb_i)
+    if in_args.limit > 0:
+        for alb_i in in_organizer.albums:
+            writer.write_xml(alb_i)
+            if writer.albums_written == in_args.limit:
+                break
+    else:
+        for alb_i in in_organizer.albums:
+            writer.write_xml(alb_i)
+    if in_args.manifest and writer.files_written > 0:
+        writer.write_manifest_file()
     in_stats.files_written = writer.files_written
+    in_stats.albums_written = writer.albums_written
+    in_stats.manifest_file = writer.manifest_file
 
 
 def show_debug_data(in_data):
@@ -156,6 +166,8 @@ def setup_parser():
     parser.add_argument('--manifest', action='store_true',
                         default=False,
                         help='output manifest of new files')
+    parser.add_argument('--limit', type=int, default=0,
+                        help='limit number of album files written')
     return parser
 
 

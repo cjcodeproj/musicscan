@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #
-# Copyright 2025 Chris Josephes
+# Copyright 2026 Chris Josephes
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -26,6 +26,9 @@
 Write out XML data for an album.
 '''
 
+# pylint: disable=R0902
+
+
 import datetime
 import os.path
 from musicscan.xml.builder import (CompleteCompactDiscXML,
@@ -44,7 +47,9 @@ class XMLFileWriter():
         self._overwrite = False
         self._split_xml = False
         self._manifest = False
+        self.manifest_file = ''
         self.files_written = 0
+        self.albums_written = 0
         self.files_out = []
 
     def debug(self):
@@ -117,8 +122,6 @@ class XMLFileWriter():
             self.write_split_xml(in_album)
         else:
             self.write_single_xml(in_album)
-        if self._manifest and len(self.files_out) > 0:
-            self.write_manifest_file()
 
     def write_single_xml(self, in_album):
         '''
@@ -132,6 +135,7 @@ class XMLFileWriter():
                 f_handle.write(audiocd.build(in_album))
                 f_handle.close()
                 self.files_written += 1
+                self.albums_written += 1
                 self.files_out.append(f_name)
 
     def write_split_xml(self, in_album):
@@ -154,6 +158,7 @@ class XMLFileWriter():
                 f_handle.write(audiocd.build(in_album))
                 f_handle.close()
                 self.files_written += 1
+                self.albums_written += 1
                 self.files_out.append(f_name)
 
     def write_split_xml_index(self, in_album):
@@ -195,8 +200,8 @@ class XMLFileWriter():
         f_name = 'FILES_WRITTEN-'
         f_name += t_stamp.strftime("%Y%m%dT%H%M%S")
         f_name += '.txt'
-        complete = self._path + '/' + f_name
-        with open(complete, mode='w', encoding='utf-8') as f_handle:
+        self.manifest_file = self._path + '/' + f_name
+        with open(self.manifest_file, mode='w', encoding='utf-8') as f_handle:
             for xml_file in self.files_out:
                 f_handle.write(xml_file+'\n')
             f_handle.close()
