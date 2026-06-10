@@ -1,8 +1,8 @@
 musicscan CHANGELOG
 ======================
 
-## CURRENT
-
+## RELEASE 0.2.5
+ - [musicscan-96](https://github.com/cjcodeproj/musicscan/issues/96) Release 0.2.5
  - [musicscan-81](https://github.com/cjcodeproj/musicscan/issues/81) Rate limit file generation
  - [musicscan-95](https://github.com/cjcodeproj/musicscan/issues/93) Test against TinyTag 2.2.1
  - [musicscan-42](https://github.com/cjcodeproj/musicscan/issues/42) Lyric dump as XML element
