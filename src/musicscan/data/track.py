@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #
-# Copyright 2025 Chris Josephes
+# Copyright 2026 Chris Josephes
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -58,6 +58,7 @@ class Track():
         self.short_title = ''
         self.album_artist = ''
         self.composer = ''
+        self.lyrics: list[str] = []
         self.year = '0000'
         self.flags = TrackFlags()
         self.duration_t: timedelta | None = None
@@ -76,6 +77,7 @@ class Track():
         if in_tag.composer:
             self.composer = in_tag.composer
         self._process_duration(in_tag)
+        self._process_lyrics(in_tag)
         if in_tag.year:
             self.year = sanitize_year(in_tag.year)
         else:
@@ -103,6 +105,15 @@ class Track():
             self.disc_no = int(in_tag.disc)
         if in_tag.disc_total:
             self.disc_total = int(in_tag.disc_total)
+
+    def _process_lyrics(self, in_tag: TinyTag):
+        if in_tag.other:
+            other = in_tag.other
+            lyrics = other.get('lyrics')
+            if lyrics:
+                lyric_lines = lyrics[0].split('\r')
+                for ll in lyric_lines:
+                    self.lyrics.append(ll)
 
     def set_album_object(self, in_album_object: Album):
         '''

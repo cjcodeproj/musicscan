@@ -1,6 +1,16 @@
 musicscan CHANGELOG
 ======================
 
+## CURRENT
+
+ - [musicscan-81](https://github.com/cjcodeproj/musicscan/issues/81) Rate limit file generation
+ - [musicscan-95](https://github.com/cjcodeproj/musicscan/issues/93) Test against TinyTag 2.2.1
+ - [musicscan-42](https://github.com/cjcodeproj/musicscan/issues/42) Lyric dump as XML element
+ - [musicscan-91](https://github.com/cjcodeproj/musicscan/issues/91) id3scan output should list manifest file
+ - [musicscan-92](https://github.com/cjcodeproj/musicscan/issues/92) Create empty library block
+ - [musicscan-93](https://github.com/cjcodeproj/musicscan/issues/93) Create empty productID block
+ - [musicscan-94](https://github.com/cjcodeproj/musicscan/issues/94) Move the egg info
+
 ## RELEASE 0.2.3
  - [musicscan-60](https://github.com/cjcodeproj/musicscan/issues/60) Add output file of all new files written
  - [musicscan-61](https://github.com/cjcodeproj/musicscan/issues/61) Repeated flags
